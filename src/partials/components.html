@@ -1,0 +1,58 @@
+<section
+  class="container"
+  style="border: 1px dashed #9747ff; border-radius: 10px; padding: 20px"
+>
+  <h2
+    style="
+      margin-bottom: 30px;
+      font-family: Roboto;
+      font-size: 22px;
+      font-weight: 300;
+      color: #777;
+    "
+  >
+    Тимчасова секція для компонентів
+  </h2>
+
+  <div style="display: flex; gap: 30px; align-items: center; flex-wrap: wrap">
+    <button class="button-more" type="button">Learn More</button>
+    <button class="button-favorite" type="button">
+      Learn More
+      <svg class="button-favorite__icon">
+        <use href="./images/icons.svg#icon-heart"></use>
+      </svg>
+    </button>
+
+    <button
+      type="button"
+      class="toggler"
+      onclick="const t = document.querySelector('.toggler'); t.classList.toggle('active'); document.body.classList.toggle('dark-mode');"
+    ></button>
+
+    <div class="select-letter">
+      <select
+        class="custom-select"
+        onchange="const cs = document.querySelector('.custom-select'); console.log(cs.value);"
+      >
+        <option value="a">A</option>
+        <option value="b">B</option>
+        <option value="c">C</option>
+        <option value="d">D</option>
+        <option value="e">E</option>
+        <option value="f">F</option>
+        <option value="a">A</option>
+        <option value="b">B</option>
+        <option value="c">C</option>
+        <option value="d">D</option>
+        <option value="e">E</option>
+        <option value="f">F</option>
+        <option value="a">A</option>
+        <option value="b">B</option>
+        <option value="c">C</option>
+        <option value="d">D</option>
+        <option value="e">E</option>
+        <option value="f">F</option>
+      </select>
+    </div>
+  </div>
+</section>

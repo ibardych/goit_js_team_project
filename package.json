@@ -18,6 +18,7 @@
     "url": "https://github.com/ibardych/goit_js_team_project/issues"
   },
   "dependencies": {
+    "custom-select": "^1.1.15",
     "modern-normalize": "^1.1.0"
   },
   "devDependencies": {
