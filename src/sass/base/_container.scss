@@ -6,13 +6,13 @@
   margin-left: auto;
   margin-right: auto;
 
-  @media screen and (min-width: $tablet) {
+  @include for-size(tablet) {
     width: $tablet;
     padding-left: 37px;
     padding-right: 37px;
   }
 
-  @media screen and (min-width: $desktop) {
+  @include for-size(desktop) {
     width: $desktop;
   }
 }
