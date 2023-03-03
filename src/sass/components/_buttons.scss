@@ -1,16 +1,77 @@
 .button-more {
-  padding: 12px 38px;
+  font-size: 14px;
+  font-family: 'Roboto', sans-serif;
+  padding: 8px 16px;
+  line-height: 1.7;
   background-color: $grapefruit-color;
   border-radius: 4px;
   color: #fff;
-  transition-property: background-color, color;
-  transition: $animation-duration $transition-timing-function;
+  transition: background-color $animation-duration $transition-timing-function,
+    color $animation-duration $transition-timing-function;
   cursor: pointer;
   border: none;
+  letter-spacing: 0.02px;
 
   &:hover,
   &:focus {
     background-color: #f5f5f5;
     color: $grapefruit-color;
+  }
+
+  @include for-size(tablet) {
+    font-size: 20px;
+    padding: 12px 27px;
+  }
+
+  @include for-size(desktop) {
+    padding: 12px 38px;
+  }
+}
+
+.button-favorite {
+  font-size: 14px;
+  line-height: 1.7;
+  padding: 6px 20px;
+  color: $grapefruit-color;
+  transition: background-color $animation-duration $transition-timing-function,
+    color $animation-duration $transition-timing-function;
+  cursor: pointer;
+  border: none;
+  background-color: rgb(0 0 0 / 0);
+  border-radius: 4px;
+  border: 2px solid $grapefruit-color;
+  display: flex;
+  align-items: center;
+  column-gap: 8px;
+
+  &:hover,
+  &:focus {
+    background-color: #f5f5f5;
+    color: $grapefruit-color;
+
+    .button-favorite__icon {
+      fill: $grapefruit-color;
+    }
+  }
+
+  @include for-size(tablet) {
+    font-size: 20px;
+    padding: 10px 24px 10px 13px;
+  }
+
+  @include for-size(desktop) {
+    padding: 10px 26px 10px 24px;
+  }
+
+  &__icon {
+    width: 19px;
+    height: 17px;
+    fill: $white-color;
+    transition: fill $animation-duration $transition-timing-function;
+
+    @include for-size(tablet) {
+      width: 21px;
+      height: 19px;
+    }
   }
 }
