@@ -1,0 +1,32 @@
+.toggler {
+  width: 40px;
+  height: 20px;
+  background-color: #fff;
+  position: relative;
+  border-radius: 40px;
+  border: 1px solid $grapefruit-color;
+  cursor: pointer;
+
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    width: 16px;
+    height: 16px;
+    background-color: $grapefruit-color;
+    border-radius: 40px;
+  }
+
+  &.active {
+    border: 1px solid #fff;
+    background-color: $grapefruit-color;
+
+    &::after {
+      left: auto;
+      right: 1px;
+      background-color: #fff;
+    }
+  }
+}
