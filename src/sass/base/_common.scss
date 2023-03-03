@@ -7,6 +7,11 @@ body {
   font-weight: 500;
   color: $black-color;
   line-height: 1.2;
+  position: relative;
+
+  &.dark-mode {
+    background-color: $black-color;
+  }
 }
 
 .visually-hidden {
