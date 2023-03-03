@@ -1,2 +1,12 @@
-@import './common';
-@import './example';
+@import './utils/mixins';
+@import './utils/placeholders';
+@import './utils/variables';
+@import './base/reset';
+@import './base/common';
+@import './base/container';
+@import './layout/header';
+@import './layout/hero';
+@import './layout/main';
+@import './layout/footer';
+@import './layout/modal-coctail';
+@import './layout/modal-ingredient';
