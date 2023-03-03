@@ -143,3 +143,8 @@
     gap: 16px;
   }
 }
+
+body.dark-mode .gallery-title,
+.gallery-item__title {
+  color: $white-color;
+}
