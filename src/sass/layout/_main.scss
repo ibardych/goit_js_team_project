@@ -143,3 +143,11 @@
     gap: 16px;
   }
 }
+
+body.dark-mode .gallery-title {
+  color: $white-color;
+}
+
+body.dark-mode .gallery-item__title {
+  color: $white-color;
+}
