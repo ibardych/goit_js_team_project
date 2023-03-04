@@ -1,0 +1,138 @@
+.ingr-backdrop {
+    z-index: 100;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(94,99,99,.7);
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow: scroll;
+}
+
+.ingr-backdrop.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.tablet-desktop-ingr-modal {
+  position: relative;
+  margin: 0 auto;
+  max-width: 822px;
+  padding: 40px 28px 20px 28px;
+  transform: translateY(10%);
+  background-color: white;
+  min-height: 598px;
+}
+
+.ingr-title {
+//   font-family: 'Poppins';
+  font-weight: 900;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.ingr-subtitle {
+//   text(16px, 600, 24px);
+  font-weight: 600;
+  margin-bottom: 40px;
+  text-transform: uppercase;
+}
+
+.horiontal-line {
+  width: 100%;
+  background-color: #FD5103;
+  height: 2px;
+  margin-bottom: 28px;
+}
+.ingr-description {
+  margin-bottom: 20px;
+  width: 85%;
+}
+
+.ingridients-list {
+    // font-family: ;
+    color: #000917;
+    flex-direction: column;
+    row-gap: 10px;
+    margin-bottom: 32px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.625;
+    display: flex;
+}
+
+.ingridients-item {
+    cursor: pointer;
+    align-items: center;
+    column-gap: 10px;
+    display: flex;
+}
+
+
+.ingr-icon-close {
+  top: 14px;
+  right: 13px;
+  width: 32px;
+  height: 32px;
+  position: absolute;
+}
+
+.mobile-ingr-modal {
+  min-height: 100%;
+  padding: 40px 20px;
+  margin-top: -20px;
+  width: 100%;
+  background-color: white;
+}
+
+.mobile-ingr-icon-close {
+  width: 32px;
+  height: 32px;
+}
+.mobile-ingr-description {
+  font-style: normal;
+//   font-family: ;
+  font-weight: 600;
+  font-size: 16px;
+  color: #5f6775;
+  line-height: 28px;
+}
+
+button {
+    cursor: pointer;
+    text-transform: none;
+    margin: 0;
+    font-family: inherit;
+    font-size: 100%;
+    line-height: 1.15;
+    box-sizing: border-box;
+}
+
+.tablet-btn {
+    background-color: #FD5103;
+    border: 1px solid #FD5103;
+    color: #fff;
+    border-radius: 4px;
+    padding: 12px 24px;
+}
+
+.btn-bottom-wrapper {
+    justify-content: flex-end;
+    padding-right: 28px;
+    display: flex;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
