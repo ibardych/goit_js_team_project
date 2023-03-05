@@ -37,6 +37,7 @@
     color: $grapefruit-color;
     text-decoration: underline;
     @include transition(opacity);
+    padding: 0;
 
     &:hover,
     &:focus {
