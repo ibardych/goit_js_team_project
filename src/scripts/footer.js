@@ -1,17 +1,18 @@
 function backToTop() {
- let button = $('.back-to-top');
+  const button = document.querySelector('.back-to-top');
 
- $(window).on('scroll', () => {
-    if ($(this).scrollTop() >= 50) {
-        button.fadeIn();
+  window.addEventListener('scroll', () => {
+    if (window.scrollY >= 50) {
+      button.style.opacity = 1;
     } else {
-        button.fadeOut();
+      button.style.opacity = 0;
     }
- });
- button.on('click', (e) => {
+  });
+
+  button.addEventListener('click', e => {
     e.preventDefault();
-    $('html').animate({scrollTop: 0}, 1000)
- })
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
 }
 
 backToTop();
