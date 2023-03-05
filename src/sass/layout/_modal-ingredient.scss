@@ -119,8 +119,8 @@
 
 .ingr-icon-close:hover,
 .ingr-icon-close:focus {
-  fill: white;
-  background: #FD5103;
+  // fill: white;
+  // background: #FD5103;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.55)) drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.55));
 }
 
@@ -175,4 +175,43 @@
   justify-content: flex-end;
   padding-right: 28px;
   display: flex;
+}
+
+
+.btn-bottom-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 28px;
+}
+
+.tablet-btn {
+  padding: 12px 24px;
+  background-color: #fd5103;
+  border: 1px solid #fd5103;
+  border-radius: 4px;
+  color: white;
+}
+
+.tablet-btn-add:hover {
+  background-color: #fd5103;
+}
+
+.tablet-btn-remove:hover {
+  background-color: #fd5103;
+}
+
+.tablet-btn-add {
+  margin-bottom: 28px;
+}
+
+.tablet-btn-remove {
+  margin-bottom: 28px;
+}
+
+.ingr-btn__add:hover {
+  background-color: #fd5103;
+}
+
+.ingr-btn__remove:hover {
+  background-color: #fd5103;
 }
