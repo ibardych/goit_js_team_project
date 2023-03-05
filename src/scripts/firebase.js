@@ -32,10 +32,10 @@ auth.onAuthStateChanged(user => {
     const displayName = user.displayName;
     const photoURL = user.photoURL;
 
-    console.log('Signed in user:', uid, email);
+    //console.log('Signed in user:', uid, email);
   } else {
     // No user is signed in
-    console.log('No user is signed in.');
+    //console.log('No user is signed in.');
   }
 });
 
@@ -47,10 +47,10 @@ onValue(nodeRef, snapshot => {
 
   for (key in data) {
     const v = data[key][1];
-    console.log(v);
+    //console.log(v);
   }
 
-  console.log(data);
+  //console.log(data);
   //updateStarCount(postElement, data);
 });
 
