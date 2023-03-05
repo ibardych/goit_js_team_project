@@ -1,33 +1,57 @@
-<section class="modal-ingr " style="display: none;">
+<section class="modal is-hidden modal-ingr" data-modal-ingredient>
+  <div class="modal__window modal-ingr__window">
+    <div class="modal__inner modal-ingr__inner">
+      <h2 class="modal-ingr__title">title</h2>
+      <h3 class="modal-ingr__subtitle">subtitle</h3>
+      <div class="modal-ingr__horiontal-line"></div>
+      <div>
+        <p class="modal-ingr__description">
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo
+          accusantium in quidem quos qui laudantium. Dolor non corporis iste,
+          rem commodi earum numquam mollitia facilis rerum ipsam saepe aut
+          debitis.
+        </p>
+        <ul class="modal-ingr__list">
+          <li class="modal-ingr__list__item">
+            <span class="modal-ingr__list__item__star">✶ </span>Type: Bitters
+          </li>
+          <li class="modal-ingr__list__item">
+            <span class="modal-ingr__list__item__star">✶ </span>Country of
+            origin: Italy
+          </li>
+          <li class="modal-ingr__list__item">
+            <span class="modal-ingr__list__item__star">✶ </span>Alcohol by
+            volume: 20.5–28.5%
+          </li>
+          <li class="modal-ingr__list__item">
+            <span class="modal-ingr__list__item__star">✶ </span>Flavour: Bitter,
+            spicy and sweet
+          </li>
+        </ul>
+      </div>
 
-    <div class="ingr-backdrop">
-        <div class="tablet-desktop-ingr-modal">
-            <h3 class="ingr-title">title</h3>
-            <h4 class="ingr-subtitle">subtitle</h4>
-            <div class="horiontal-line"></div>
-            <div>
-                <p class="ingr-description"><span class="ingr-description-b">Title</span> text</p>
-                <ul class="ingridients-list list">
-                    <li class="ingridients-item"><span class="star">✶ </span>Type: Bitters</li>
-                    <li class="ingridients-item"><span class="star">✶ </span>Country of origin: Italy</li>
-                    <li class="ingridients-item"><span class="star">✶ </span>Alcohol by volume: 20.5–28.5%</li>
-                    <li class="ingridients-item"><span class="star">✶ </span>Flavour: Bitter, spicy and sweet</li>
-                </ul>
-            </div>
+      <div class="modal-ingr__btns">
+        <button
+          type="button"
+          class="button-more modal-ingr__btn"
+          data-modal-authentication-open
+        >
+          Add to favorite
+        </button>
+        <button
+          type="button"
+          class="button-more modal-ingr__btn"
+          style="display: none"
+        >
+          Remove from favorite
+        </button>
+      </div>
 
-            <div class="btn-bottom-wrapper">
-                <button type="button" class="button tablet-btn ingr-btn__add" style="display: none;">Add to
-                    favorite</button>
-                <button type="button" class="button tablet-btn ingr-btn__remove" style="display: block;">Remove from
-                    favorite</button>
-            </div>
-            <div>
-                <svg class="ingr-icon-close">
-                    <use class="use-heart1" href="./images/symbol-defs.svg#icon-close-line"></use>
-                </svg>
-            </div>
-        </div>
+      <button type="button" class="modal__close" data-modal-ingredient-close>
+        <svg class="modal__close__icon">
+          <use class="use-heart1" href="./images/icons.svg#icon-close"></use>
+        </svg>
+      </button>
     </div>
-
-
+  </div>
 </section>

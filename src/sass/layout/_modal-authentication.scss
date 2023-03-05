@@ -1,0 +1,11 @@
+.modal-authentication {
+  background-color: rgb(0 0 0 / 0.8);
+
+  &__window {
+    width: 400px;
+  }
+
+  &__inner {
+    padding: 40px 28px 28px 28px;
+  }
+}

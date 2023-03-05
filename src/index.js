@@ -1,3 +1,4 @@
 import './scripts/custom-select';
 import './scripts/firebase';
-import './scripts/modal-create-account';
+import './scripts/modal-ingredient';
+import './scripts/modal-authentication';

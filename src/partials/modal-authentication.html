@@ -1,0 +1,89 @@
+<section class="modal is-hidden modal-authentication" data-modal-authentication>
+  <div class="modal__window modal-authentication__window">
+    <div class="modal__inner modal-authentication__inner">
+      <section>
+        <h2 style="margin-bottom: 20px">Firebase Authentication</h2>
+        <p class="modal__text">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero, et,
+          earum odio ipsam iusto enim porro qui non quas nisi debitis, ea rerum
+          sed modi placeat aliquid error distinctio dignissimos.
+        </p>
+        <form name="modal-form">
+          <label class="modal__form-label" for="modal-store-email">Email</label>
+          <input
+            class="modal__form-input modal__form-input-last text-input"
+            type="email"
+            name="email"
+            placeholder="Your email"
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+            required
+          />
+          <label class="modal__form-label" for="modal-store-name"
+            >Password</label
+          >
+          <input
+            class="modal__form-input text-input"
+            type="password"
+            name="password"
+            placeholder="Your password"
+            title="Password ..."
+            required
+          />
+          <button
+            type="submit"
+            class="modal-button modal-button-diabled"
+            data-action="send"
+            style="display: none"
+          >
+            Send
+          </button>
+        </form>
+
+        <div id="login-form" style="margin-bottom: 20px; display: none">
+          <h2 style="margin-bottom: 20px">Login</h2>
+          <input type="email" id="email" placeholder="Email" />
+          <input type="password" id="password" placeholder="Password" />
+          <button id="login-btn">Login</button>
+          <div id="error-message"></div>
+        </div>
+        <div id="join-form" style="margin-bottom: 20px; display: none">
+          <h2 style="margin-bottom: 20px">Create Account</h2>
+          <input type="email" id="email1" placeholder="Email" />
+          <input type="password" id="password1" placeholder="Password" />
+          <button id="create-btn">Create</button>
+          <div id="error-message"></div>
+        </div>
+        <div id="data-form" style="display: none">
+          <h2 style="margin-bottom: 20px">Enter Data</h2>
+          <input type="text" id="data-input" placeholder="Enter data" />
+          <button id="save-btn">Save Data</button>
+          <button id="delete-btn">Delete Data</button>
+          <button id="logout-btn">Logout</button>
+        </div>
+      </section>
+
+      <div class="modal-authentication__btns">
+        <button type="button" class="button-more modal-authentication__btn">
+          Login
+        </button>
+        <button
+          type="button"
+          class="button-more modal-authentication__btn"
+          style="display: none"
+        >
+          Remove from favorite
+        </button>
+      </div>
+
+      <button
+        type="button"
+        class="modal__close"
+        data-modal-authentication-close
+      >
+        <svg class="modal__close__icon">
+          <use class="use-heart1" href="./images/icons.svg#icon-close"></use>
+        </svg>
+      </button>
+    </div>
+  </div>
+</section>
