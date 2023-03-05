@@ -3,11 +3,12 @@ html {
 }
 
 body {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-weight: 500;
   color: $black-color;
   line-height: 1.2;
   position: relative;
+  @include transition(background-color);
 
   &.dark-mode {
     background-color: $black-color;
