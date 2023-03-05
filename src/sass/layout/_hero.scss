@@ -26,6 +26,8 @@
     @include for-size(tablet) {
         display: none;
     }
+
+
 }
 
 .hero-img-mobile {
@@ -51,7 +53,13 @@
     line-height: 2em;
     color: rgba(0, 0, 0, 0.8);    
     text-align: center;
-    margin-bottom: 28px;
+    margin-bottom: 28px;    
+    transition: color $animation-duration $transition-timing-function;
+
+    
+    body.dark-mode &{
+        color: #FCFCFC80;
+    }
 
     @include for-size (tablet) {
         display: none;
@@ -85,6 +93,7 @@
     @include for-size(desktop) {        
         width: 684px;
     }
+ 
 }
 
 .hero-caption {
@@ -113,12 +122,19 @@
     color: #20202580;
     margin: 0;
     margin-bottom: 40px;
+    transition: color $animation-duration $transition-timing-function;
 
     @include for-size(desktop) {
         font-size: 18px;  
         line-height: 1.55em;
         margin-bottom: 47px;
     }
+
+    
+    body.dark-mode &{
+        color: #FCFCFC80;
+      }
+
 }
 
 .container-alphabet {
@@ -153,6 +169,7 @@
         width: 40px;
         height: 40px;
     }
+
 }
 
 .img-fromtablet {
@@ -177,9 +194,13 @@
 }
 
 
+// body.dark-mode {
 
+//     .hero-textpart {
+//         color: #FCFCFC80;
+//     }
 
-
-
-
-
+//     .selector {
+//         color: #5F6775;
+//     }
+// }
