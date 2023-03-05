@@ -6,7 +6,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from 'firebase/auth';
-import { getDatabase, ref, set, onValue } from 'firebase/database';
+import { getDatabase, ref, set, remove, onValue } from 'firebase/database';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyCTBJG-qoCxnqY0kLartne6JuIMgO3rCtI',
@@ -40,10 +40,16 @@ auth.onAuthStateChanged(user => {
 });
 
 // Retrieve data from the node once
-const nodeRef = ref(db, 'coctails/id1');
+const nodeRef = ref(db, 'coctails');
 
 onValue(nodeRef, snapshot => {
   const data = snapshot.val();
+
+  for (key in data) {
+    const v = data[key][1];
+    console.log(v);
+  }
+
   console.log(data);
   //updateStarCount(postElement, data);
 });
@@ -55,6 +61,7 @@ var createBtn = document.getElementById('create-btn');
 var loginBtn = document.getElementById('login-btn');
 var logoutBtn = document.getElementById('logout-btn');
 var saveBtn = document.getElementById('save-btn');
+var deleteBtn = document.getElementById('delete-btn');
 var dataInput = document.getElementById('data-input');
 var emailInput = document.getElementById('email');
 var passwordInput = document.getElementById('password');
@@ -116,13 +123,22 @@ saveBtn.addEventListener('click', function () {
 
   console.log(user);
 
-  const taskRef = ref(db, 'coctails/id1');
+  const taskRef = ref(db, `coctails/${user.uid}/3`);
   set(taskRef, {
-    title: 'Margarita',
-    description: 'Text',
+    title: 'Margarita3',
+    description: 'Text3іввіа',
     assignedUser: user.uid,
   });
   console.log('Data added to database!');
+});
+
+deleteBtn.addEventListener('click', function () {
+  const user = auth.currentUser;
+
+  const taskRef = ref(db, `coctails/${user.uid}/3`);
+
+  remove(taskRef);
+  console.log('Data removed from database!');
 });
 
 () => {
