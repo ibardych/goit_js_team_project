@@ -83,11 +83,16 @@
   font-size: 12px;
   line-height: 1.25;
   margin-bottom: 18px;
-  color: $grapefruit-color;
+  color: $black-color;
+  @include transition(color);
 
   @media screen and (min-width: $tablet) {
     font-size: 16px;
     margin-bottom: 32px;
+  }
+
+  body.dark-mode & {
+    color: $gray-color-dark-mode;
   }
 }
 
@@ -133,6 +138,10 @@
 
   &:focus {
     border: 1px solid #000;
+
+    body.dark-mode & {
+      border-color: $gray-color-dark-mode;
+    }
   }
 
   &::placeholder {
@@ -145,5 +154,9 @@
 
   &--required {
     border-color: rgb(185, 12, 12) !important;
+  }
+
+  body.dark-mode & {
+    color: $white-color;
   }
 }

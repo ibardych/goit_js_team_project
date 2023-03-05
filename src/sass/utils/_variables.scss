@@ -16,3 +16,8 @@ $desktop: 1280px;
 /* Animations */
 $animation-duration: 250ms;
 $transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+/* Loaders */
+$loader-type1-width: 10%;
+$loader-type1-height: 27%;
+$loader-type1-color: $grapefruit-color;

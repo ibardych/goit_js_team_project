@@ -2,13 +2,19 @@
   <div class="modal__window modal-authentication__window">
     <div class="modal__inner modal-authentication__inner">
       <section>
-        <h2 style="margin-bottom: 20px">Firebase Authentication</h2>
-        <p class="modal__text">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero, et,
-          earum odio ipsam iusto enim porro qui non quas nisi debitis, ea rerum
-          sed modi placeat aliquid error distinctio dignissimos.
-        </p>
-        <form name="modal-form">
+        <form name="modal-form" id="login-form">
+          <h2 class="modal-authentication__title">Login</h2>
+          <p class="modal__text">
+            If you don't have an account yet, click
+            <button
+              class="modal-authentication__btn-create-account"
+              type="button"
+              data-modal-authentication-join
+            >
+              here
+            </button>
+          </p>
+
           <label class="modal__form-label" for="modal-store-email">Email</label>
           <input
             class="modal__form-input modal__form-input-last text-input"
@@ -29,14 +35,58 @@
             title="Password ..."
             required
           />
-          <button
-            type="submit"
-            class="modal-button modal-button-diabled"
-            data-action="send"
-            style="display: none"
+          <div class="modal-authentication__btns">
+            <button
+              type="button"
+              class="button-more modal-authentication__btn modal-button-diabled"
+              data-action="send"
+            >
+              Login
+            </button>
+          </div>
+        </form>
+
+        <form name="modal-form" class="visually-hidden" id="join-form">
+          <h2 class="modal-authentication__title">Create an account</h2>
+          <p class="modal__text">
+            If you allready have an account, click
+            <button
+              class="modal-authentication__btn-create-account"
+              type="button"
+              data-modal-authentication-login
+            >
+              here
+            </button>
+          </p>
+          <label class="modal__form-label" for="modal-store-email">Email</label>
+          <input
+            class="modal__form-input modal__form-input-last text-input"
+            type="email"
+            name="email"
+            placeholder="Your email"
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+            required
+          />
+          <label class="modal__form-label" for="modal-store-name"
+            >Password</label
           >
-            Send
-          </button>
+          <input
+            class="modal__form-input text-input"
+            type="password"
+            name="password"
+            placeholder="Your password"
+            title="Password ..."
+            required
+          />
+          <div class="modal-authentication__btns">
+            <button
+              type="button"
+              class="button-more modal-authentication__btn modal-button-diabled"
+              data-action="send"
+            >
+              Join
+            </button>
+          </div>
         </form>
 
         <div id="login-form" style="margin-bottom: 20px; display: none">
@@ -61,19 +111,6 @@
           <button id="logout-btn">Logout</button>
         </div>
       </section>
-
-      <div class="modal-authentication__btns">
-        <button type="button" class="button-more modal-authentication__btn">
-          Login
-        </button>
-        <button
-          type="button"
-          class="button-more modal-authentication__btn"
-          style="display: none"
-        >
-          Remove from favorite
-        </button>
-      </div>
 
       <button
         type="button"
