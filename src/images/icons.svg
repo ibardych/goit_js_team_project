@@ -9,5 +9,9 @@
     <symbol id="icon-arrow-down" viewBox="0 0 13 8" fill="#FD5103">
       <path d="M0.842773 1.59323L6.49977 7.25023L12.1568 1.59323L11.4498 0.88623L6.49977 5.83623L1.54977 0.88623L0.842773 1.59323Z" fill="#FD5103"/>
     </symbol>
+
+    <symbol id="icon-close" viewBox="0 0 18 18">
+      <path stroke-linecap="round" stroke-width="2" d="M15 3L3 15M15 15L3 3L15 15Z" />
+    </symbol>
   </defs>
 </svg>
