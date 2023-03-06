@@ -6,9 +6,9 @@ const requestCocktail = ({ cocktailId }) => {
   );
 };
 
-const requestIngredient = ({ ingredientId }) => {
+const requestIngredient = ({ ingredientName }) => {
   return axios.get(
-    `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?iid=${ingredientId}`
+    `https://www.thecocktaildb.com/api/json/v1/1/search.php?i=${ingredientName}`
   );
 };
 

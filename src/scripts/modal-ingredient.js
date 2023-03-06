@@ -1,22 +1,45 @@
+import { enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 import { requestIngredient } from './requests';
+import { getIngredientPattern, loaderPattern } from './common/patterns';
+import { checkWindowWidth } from './common/modals';
 
 const refs = {
   openModalBtns: document.querySelectorAll('[data-modal-ingredient-open]'),
   closeModalBtn: document.querySelector('[data-modal-ingredient-close]'),
+  modalContentEl: document.querySelector('[data-modal-ingredient-content]'),
   modal: document.querySelector('[data-modal-ingredient]'),
 };
 
 refs.openModalBtns.forEach(btn => {
   btn.addEventListener('click', () => {
-    const ingredientId = btn.dataset.ingredientid;
-    requestIngredient({ ingredientId: ingredientId })
+    const ingrInput = document.querySelector('input[data-ingredientname]');
+    const ingredientName = ingrInput.value || 'Vodka';
+    // const ingredientName = btn.dataset.ingredientid;
+    requestIngredient({ ingredientName: ingredientName })
       .then(response => {
-        console.log(response.data);
-        //return value.json();
+        const ingredient = response.data.ingredients[0];
+        console.log(ingredient);
+        const ingredientData = {
+          id: ingredient.idIngredient,
+          country: '',
+          alcohol: ingredient.strAlcohol,
+          title: ingredient.strIngredient,
+          subtitle: '',
+          description: ingredient.strDescription,
+          abv: ingredient.strABV,
+          type: ingredient.strType,
+          ingredient: ingredient.strIngredient,
+        };
+        const content = getIngredientPattern(ingredientData);
+        refs.modalContentEl.innerHTML = content;
+
+        checkWindowWidth();
+
+        const modal = document.querySelector('.modal');
+        //modal.style.paddingRight = '0px';
+        // clearAllBodyScrollLocks();
+        // enableBodyScroll(document.body);
       })
-      // .then(data => {
-      //   console.log(data);
-      // })
       .catch(error => {
         console.log(error);
       });
@@ -24,15 +47,3 @@ refs.openModalBtns.forEach(btn => {
     refs.modal.classList.toggle('is-hidden');
   });
 });
-
-refs.closeModalBtn.addEventListener('click', () => {
-  refs.modal.classList.toggle('is-hidden');
-});
-
-refs.modal.addEventListener('click', e => {
-  if (e.target.classList.contains('modal')) {
-    refs.modal.classList.toggle('is-hidden');
-  }
-});
-
-const loaderEl = `<div data-loader='' class="loader-type1"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>`;

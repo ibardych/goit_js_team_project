@@ -1,3 +1,5 @@
+import './scripts/common/general';
+import './scripts/common/modals';
 import './scripts/custom-select';
 import './scripts/firebase';
 import './scripts/modal-ingredient';

@@ -21,8 +21,8 @@
   left: 50%;
   width: calc(#{$mobile} - 24px * 2);
   max-width: calc(100% - 24px * 2);
+  max-height: calc(100% - 24px * 2);
   transform: translateX(-50%) translateY(-50%);
-  overflow: hidden;
 }
 
 .modal__inner {
