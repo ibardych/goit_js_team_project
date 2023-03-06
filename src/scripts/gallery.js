@@ -32,7 +32,7 @@ async function createGallery() {
     src="${strDrinkThumb}" alt="${strDrink} photo" />
       <h2 class="gallery-item__title gallery-item__title_margin">${strDrink}</h2>
       <div class="button-container">
-        <button class="button-more" type="button" cocktailid="${idDrink}">Learn More</button>
+        <button class="button-more" type="button" data-cocktailid="${idDrink}">Learn More</button>
         <button class="button-favorite" type="button">
           Add to
           <svg class="button-favorite__icon">
