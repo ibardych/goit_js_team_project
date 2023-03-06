@@ -44,15 +44,15 @@
   gap: 20px;
 
   @media screen and (max-width: 767px) {
-    & li:nth-last-child(-n + 6) {
-      display: none;
-    }
+    // & li:nth-last-child(-n + 6) {
+    //   display: none;
+    // }
   }
 
   @media screen and (max-width: 1279px) {
-    & li:nth-last-child(-n + 3) {
-      display: none;
-    }
+    // & li:nth-last-child(-n + 3) {
+    //   display: none;
+    // }
   }
 
   @include for-size(tablet) {
