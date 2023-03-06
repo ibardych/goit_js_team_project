@@ -1,5 +1,4 @@
 .select-letter {
-   
   & .custom-select {
     &-opener {
       border: 1px solid $grapefruit-color;
@@ -13,8 +12,6 @@
       position: relative;
       width: 93px;
       height: 34px;
-      margin-right: auto;
-      margin-left: auto;
 
       &:focus {
         background-color: $grapefruit-color;
@@ -42,14 +39,11 @@
     }
 
     &-panel {
-      position: relative;
       border-radius: 4px;
       background-color: #fff;
       box-shadow: inset 0px 0px 0px 1px $grapefruit-color;
       overflow: hidden;
       width: 93px;
-      margin-left: auto;
-      margin-right: auto;
 
       body.dark-mode & {
         background-color: $black-color;
@@ -80,5 +74,4 @@
       }
     }
   }
-
 }
