@@ -1,4 +1,6 @@
 .modal-ingr {
+  backdrop-filter: blur(3px);
+
   &__window {
     width: 717px;
   }

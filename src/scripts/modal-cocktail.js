@@ -1,15 +1,15 @@
-import { requestIngredient } from './requests';
+import { requestCocktail } from './requests';
 
 const refs = {
-  openModalBtns: document.querySelectorAll('[data-modal-ingredient-open]'),
-  closeModalBtn: document.querySelector('[data-modal-ingredient-close]'),
-  modal: document.querySelector('[data-modal-ingredient]'),
+  openModalBtns: document.querySelectorAll('[data-modal-cocktail-open]'),
+  closeModalBtn: document.querySelector('[data-modal-cocktail-close]'),
+  modal: document.querySelector('[data-modal-cocktail]'),
 };
 
 refs.openModalBtns.forEach(btn => {
   btn.addEventListener('click', () => {
-    const ingredientId = btn.dataset.ingredientid;
-    requestIngredient({ ingredientId: ingredientId })
+    const cocktailId = btn.dataset.cocktailid;
+    requestCocktail({ cocktailId: cocktailId })
       .then(response => {
         console.log(response.data);
         //return value.json();
@@ -34,5 +34,3 @@ refs.modal.addEventListener('click', e => {
     refs.modal.classList.toggle('is-hidden');
   }
 });
-
-const loaderEl = `<div data-loader='' class="loader-type1"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>`;
