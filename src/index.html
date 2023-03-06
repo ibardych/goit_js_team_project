@@ -19,31 +19,15 @@
     <link rel="stylesheet" href="./sass/index.scss" />
   </head>
   <body>
-    <div
-      id="toggler-test"
-      style="position: absolute; top: 80px; right: 0px; overflow: hidden"
-    >
-      <div
-        style="
-          width: 30px;
-          height: 30px;
-          background-color: #888;
-          border-radius: 100px;
-          box-shadow: 0px 1px 4px 0px rgb(0 0 0 / 0.3);
-          cursor: pointer;
-          position: relative;
-          right: -10px;
-        "
-        onclick="document.body.classList.toggle('dark-mode');"
-      ></div>
-    </div>
-
     <include src="./partials/header.html"></include>
     <include src="./partials/hero.html"></include>
+    <include src="./partials/components.html"></include>
     <include src="./partials/main.html"></include>
-    <include src="./partials/modal-coctail.html"></include>
-    <include src="./partials/modal-ingredient.html"></include>
     <include src="./partials/footer.html"></include>
+    <include src="./partials/modal-cocktail.html"></include>
+    <include src="./partials/modal-ingredient.html"></include>
+    <include src="./partials/modal-authentication.html"></include>
+    <include src="./partials/mobile-menu.html"></include>
 
     <script type="module" src="./index.js"></script>
   </body>

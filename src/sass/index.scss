@@ -3,6 +3,10 @@
 @import './utils/variables';
 
 @import './components/buttons';
+@import './components/toggler';
+@import './components/custom-select';
+@import './components/modal';
+@import './components/loaders';
 
 @import './base/reset';
 @import './base/common';
@@ -12,5 +16,7 @@
 @import './layout/hero';
 @import './layout/main';
 @import './layout/footer';
-@import './layout/modal-coctail';
+@import './layout/modal-cocktail';
 @import './layout/modal-ingredient';
+@import './layout/modal-authentication';
+@import './layout/mobile-menu';
