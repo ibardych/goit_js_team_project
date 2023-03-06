@@ -1,4 +1,5 @@
 import axios from 'axios';
+import throttle from 'lodash.throttle';
 import { getRundomCocktailes } from './requests';
 
 const galleryEl = document.querySelector('.gallery-list');
@@ -47,4 +48,4 @@ async function createGallery() {
 }
 
 createGallery();
-window.addEventListener('resize', createGallery);
+window.addEventListener('resize', throttle(createGallery, 1000));
