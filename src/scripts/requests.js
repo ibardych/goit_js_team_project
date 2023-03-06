@@ -12,4 +12,11 @@ const requestIngredient = ({ ingredientName }) => {
   );
 };
 
-export { requestCocktail, requestIngredient };
+async function getRundomCocktailes() {
+  const response = await axios.get(
+    'https://www.thecocktaildb.com/api/json/v1/1/random.php'
+  );
+  return response.data.drinks[0];
+}
+
+export { requestCocktail, requestIngredient, getRundomCocktailes };
