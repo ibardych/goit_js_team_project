@@ -1,17 +1,19 @@
-const alphabetButton = document.querySelector('.selector');
-const alphabetContainer = document.querySelector('.container-alphabet');
+// import { createRequstByLetter } from "./hero_api";
 
-alphabetContainer.addEventListener('click', onLetterClick);
+// const alphabetButton = document.querySelector('.selector');
+// const alphabetContainer = document.querySelector('.container-alphabet');
 
- export function onLetterClick (evt) {
+// alphabetContainer.addEventListener('click', onLetterClick);
 
-    if (evt.target.nodeName !== 'BUTTON') {
-        return
-    }
+//  export function onLetterClick (evt) {
 
-    const currentLetter = alphabetButton.textContent;
+//     if (evt.target.nodeName !== 'BUTTON') {
+//         return
+//     }
 
-    console.log(currentLetter);
+//     const currentLetter  = alphabetButton.textContent;     
+    
+//     createRequstByLetter(currentLetter);
+// }
 
-    return currentLetter;
-}
+
