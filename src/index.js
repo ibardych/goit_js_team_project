@@ -6,3 +6,4 @@ import './scripts/modal-authentication';
 import './scripts/footer';
 import './hero_js/hero_index';
 import './hero_js/hero_api';
+import './scripts/gallery';
