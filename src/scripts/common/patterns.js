@@ -1,14 +1,18 @@
-const getCocktailPattern = () => {
+const getCocktailPattern = ({
+  id,
+  title,
+  image,
+  instructions,
+  ingredients,
+}) => {
   const pattern1 = `
     <div class="modal-cocktail__content">
       <!--------- Name and Instructions for mobile version --------->
       <div>
-        <h2 class="modal-cocktail__title hidden-in-tablet">Negroni</h2>
+        <h2 class="modal-cocktail__title hidden-in-tablet">${title}</h2>
         <h3 class="modal-cocktail__subtitle hidden-in-tablet">Instructions:</h3>
         <p class="modal-cocktail__text">
-          Add the gin, Campari and sweet vermouth to a mixing glass filled with
-          ice, and stir until well-chilled. Strain into a rocks glass filled
-          with large ice cubes. Garnish with an orange peel.
+          ${instructions}
         </p>
       </div>
       <!--------- Name and Instructions for mobile version--------->
@@ -16,62 +20,31 @@ const getCocktailPattern = () => {
       <div class="modal-cocktail__card">
         <img
           class="modal-cocktail__img"
-          src="https://elipili.md/wp-content/uploads/2022/01/negroni-600x618-1.jpg"
-          alt=""
+          src="${image}"
+          alt="${title}"
           width="280px"
           height="280px"
         />
 
         <div class="modal-cocktail__bigcard">
-          <h2 class="modal-cocktail__title hidden-in-mobile">Negroni</h2>
+          <h2 class="modal-cocktail__title hidden-in-mobile">${title}</h2>
           <h3 class="sub-ingredients">Ingredients:</h3>
           <p class="modal-cocktail__smalltitle">Per cocktail</p>
           <ul class="modal-cocktail__list">
-            <li class="lish">
-              <a
-                href="#"
-                class="modal-cocktail__link"
-                data-ingredientid="1"
-                data-modal-ingredient-open
-                >✶ Ice</a
-              >
-            </li>
-            <li>
-              <a
-                href="#"
-                class="modal-cocktail__link"
-                data-ingredientid="2"
-                data-modal-ingredient-open
-                >✶ 1 ounce gin</a
-              >
-            </li>
-            <li>
-              <a
-                href="#"
-                class="modal-cocktail__link"
-                data-ingredientid="3"
-                data-modal-ingredient-open
-                >✶ 1 ounce Campari</a
-              >
-            </li>
-            <li>
-              <a
-                href="#"
-                class="modal-cocktail__link"
-                data-ingredientid="4"
-                data-modal-ingredient-open
-                >✶ 1 ounce sweet vermouth</a
-              >
-            </li>
-            <li>
-              <a
-                href="#"
-                class="modal-cocktail__link"
-                data-ingredientid="5"
-                data-modal-ingredient-open
-                >✶ Garnish: orange peel</a
-              >
-            </li>
+  `;
+
+  const pattern2 = ingredients.map(ingredient => {
+    return `<li class="lish">
+        <a
+          href="#"
+          class="modal-cocktail__link"
+          data-ingredientname="${ingredient}"
+          >✶ ${ingredient}</a
+        >
+      </li>`;
+  });
+
+  const pattern3 = `
           </ul>
         </div>
       </div>
@@ -80,16 +53,30 @@ const getCocktailPattern = () => {
       <div class="modal-cocktail__tabinstructions">
         <h3 class="modal-cocktail__subtitle hidden-in-mobile">Instructions:</h3>
         <p class="hidden-in-mobile modal-cocktail__text">
-          Add the gin, Campari and sweet vermouth to a mixing glass filled with
-          ice, and stir until well-chilled. Strain into a rocks glass filled
-          with large ice cubes. Garnish with an orange peel.
+          ${instructions}
         </p>
       </div>
       <!--------- Instructions shown in tablet and desktop --------->
+
+      <div
+        class="modal-cocktail-button-wrapper"
+      >
+        <!--------- Add to favorite button --------->
+        <button
+          type="button"
+          class="button-favorite button-modal-cocktail"
+          data-add-remove-favorite
+          data-cocktailid="${id}"
+          data-element-type="cocktail"
+        >
+          <span>Add to favorite</span>
+        </button>
+        <!--------- Add to favorite button --------->
+      </div>
     </div>
   `;
 
-  return pattern1;
+  return pattern1 + pattern2.join('') + pattern3;
 };
 
 const getIngredientPattern = ({
@@ -103,7 +90,7 @@ const getIngredientPattern = ({
   abv,
 }) => {
   const pattern1 = `
-    <div class="modal-ingr__content">
+    <div class="modal-ingr__content" id="ingredient-${id}">
       <h2 class="modal-ingr__title">${title}</h2>
       <h3 class="modal-ingr__subtitle">subtitle</h3>
       <div class="modal-ingr__horiontal-line"></div>
@@ -156,20 +143,17 @@ const getIngredientPattern = ({
   const pattern3 = `
         </ul>
       </div>
-      <div class="modal-ingr__btns">
+      <div
+        class="modal-ingr__btns"
+      >
         <button
           type="button"
           class="button-more modal-ingr__btn"
-          data-modal-authentication-open
+          data-add-remove-favorite
+          data-ingredientid="${id}"
+          data-element-type="ingredient"
         >
           Add to favorite
-        </button>
-        <button
-          type="button"
-          class="button-more modal-ingr__btn"
-          style="display: none"
-        >
-          Remove from favorite
         </button>
       </div>
     </div>
@@ -182,4 +166,34 @@ const loaderPattern = `
   <div data-loader='' class="loader-type1"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
 `;
 
-export { getCocktailPattern, getIngredientPattern, loaderPattern };
+const getUserAreaPattern = ({ email = '', authorized = false }) => {
+  if (authorized) {
+    return `
+      Logged in as <span class="user__email" data-user-email>${email}</span>
+      <button class="button-authorization user__button" type="button" data-logout-button>
+        Logout
+      </button>
+    `;
+  }
+
+  return `
+      <button class="button-authorization user__button" type="button" data-login-button>
+        Login
+      </button>
+    `;
+};
+
+const getAddedMessagePattern = ({ type, name }) => {
+  const text = type == 'cocktail' ? 'Cocktail' : 'Ingredient';
+  return `
+    ${text} <strong>${name}</strong> successfully added to your favorites.
+  `;
+};
+
+export {
+  getCocktailPattern,
+  getIngredientPattern,
+  loaderPattern,
+  getUserAreaPattern,
+  getAddedMessagePattern,
+};

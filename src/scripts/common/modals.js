@@ -1,20 +1,34 @@
 import { disableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 import { disableBodyScroll } from 'body-scroll-lock';
 
-const modals = document.querySelectorAll('.modal');
+const refs = {
+  modals: document.querySelectorAll('.modal'),
+};
 
-modals.forEach(modal => {
+const checkOpenedWindows = () => {
+  const allModalsAreHidden = Array.from(refs.modals).every(modal =>
+    modal.classList.contains('is-hidden')
+  );
+
+  if (allModalsAreHidden) {
+    refs.modals.forEach(modal => {
+      modal.firstElementChild.style.paddingRight = '0';
+    });
+
+    clearAllBodyScrollLocks();
+  }
+};
+
+refs.modals.forEach(modal => {
   modal.addEventListener('click', e => {
-    if (e.target.hasAttribute('data-modal-close')) {
-      modal.classList.toggle('is-hidden');
-      modal.firstElementChild.style.paddingRight = `0px`;
-      clearAllBodyScrollLocks();
-    }
-    if (e.target.hasAttribute('data-modal')) {
-      //modal.classList.toggle('is-hidden');
-      modal.firstElementChild.style.paddingRight = `0px`;
-      clearAllBodyScrollLocks();
-    }
+    if (
+      !e.target.hasAttribute('data-modal-close') &&
+      !e.target.hasAttribute('data-modal')
+    )
+      return;
+
+    modal.classList.toggle('is-hidden');
+    checkOpenedWindows();
   });
 });
 
@@ -24,11 +38,9 @@ const checkWindowWidth = () => {
   const widthAfter = document.documentElement.clientWidth;
   const scrollBarWidth = widthAfter - widthBefore;
 
-  const modals = document.querySelectorAll('.modal');
-
-  modals.forEach(modal => {
+  refs.modals.forEach(modal => {
     modal.firstElementChild.style.paddingRight = `${scrollBarWidth}px`;
   });
 };
 
-export { checkWindowWidth };
+export { checkWindowWidth, checkOpenedWindows };

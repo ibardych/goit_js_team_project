@@ -34,4 +34,3 @@ containerMenu.addEventListener('click', e => {
 });
 
 const favLinks = document.querySelectorAll('[data-fav]');
-console.log(favLinks);

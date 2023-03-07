@@ -5,10 +5,8 @@ import PerfectScrollbar from 'perfect-scrollbar';
 
 const refs = {
   galleryListEl: document.querySelector('.gallery-list'),
-  closeModalBtn: document.querySelector('[data-modal-cocktail-close]'),
   modal: document.querySelector('[data-modal-cocktail]'),
   modalWindow: document.querySelector('[data-modal-cocktail-window]'),
-  modalBts: document.querySelector('[data-modal-cocktail-buttons]'),
   modalContentEl: document.querySelector('[data-modal-cocktail-content]'),
 };
 
@@ -23,8 +21,6 @@ refs.galleryListEl.addEventListener('click', e => {
 
     requestCocktail({ cocktailId: cocktailId })
       .then(response => {
-        console.log(response.data);
-        refs.modalBts.classList.remove('visually-hidden');
         renderContent(response.data.drinks[0]);
       })
       .catch(error => {
@@ -36,19 +32,23 @@ refs.galleryListEl.addEventListener('click', e => {
 const renderContent = data => {
   refs.modalWindow.scrollTop = 0;
 
-  // const cocktailData = {
-  //   id: data.idIngredient,
-  //   country: '',
-  //   alcohol: data.strAlcohol,
-  //   title: data.strIngredient,
-  //   subtitle: '',
-  //   description: data.strDescription,
-  //   abv: data.strABV,
-  //   type: data.strType,
-  //   ingredient: data.strIngredient,
-  // };
+  const ingredients = [];
 
-  const content = getCocktailPattern();
+  for (let i = 1; i <= 15; i++) {
+    if (data[`strIngredient${i}`]) ingredients.push(data[`strIngredient${i}`]);
+  }
+
+  const cocktailData = {
+    id: data.idDrink,
+    title: data.strDrink,
+    image: data.strDrinkThumb,
+    alcohol: data.strAlcoholic,
+    category: data.strCategory,
+    instructions: data.strInstructions,
+    ingredients: ingredients,
+  };
+
+  const content = getCocktailPattern(cocktailData);
   refs.modalContentEl.innerHTML = content;
 
   finalizeModal();

@@ -1,0 +1,25 @@
+.user {
+  height: 0px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  font-size: 14px;
+
+  body.dark-mode & {
+    color: $white-color;
+  }
+
+  &__status {
+    position: relative;
+    bottom: -30px;
+  }
+
+  &__button {
+    margin-left: 10px;
+  }
+
+  &__email {
+    color: $grapefruit-color;
+    @include transition(opacity);
+  }
+}
