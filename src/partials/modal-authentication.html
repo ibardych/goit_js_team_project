@@ -6,7 +6,7 @@
   <div class="modal__window modal-authentication__window">
     <div class="modal__inner modal-authentication__inner">
       <section>
-        <form name="modal-form" id="login-form">
+        <form name="modal-form" data-login-form>
           <h2 class="modal-authentication__title">Login</h2>
           <p class="modal__text">
             If you don't have an account yet, click
@@ -38,19 +38,21 @@
             placeholder="Your password"
             title="Password ..."
             required
+            data-login-input-password
           />
           <div class="modal-authentication__btns">
             <button
               type="button"
               class="button-more modal-authentication__btn modal-button-diabled"
               data-action="send"
+              data-modal-login-button
             >
               Login
             </button>
           </div>
         </form>
 
-        <form name="modal-form" class="visually-hidden" id="join-form">
+        <form name="modal-form" class="visually-hidden" data-join-form>
           <h2 class="modal-authentication__title">Create an account</h2>
           <p class="modal__text">
             If you allready have an account, click
@@ -70,6 +72,7 @@
             placeholder="Your email"
             pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
             required
+            data-join-input-email
           />
           <label class="modal__form-label" for="modal-store-name"
             >Password</label
@@ -81,17 +84,26 @@
             placeholder="Your password"
             title="Password ..."
             required
+            data-join-input-password
           />
           <div class="modal-authentication__btns">
             <button
               type="button"
               class="button-more modal-authentication__btn modal-button-diabled"
               data-action="send"
+              data-modal-join-button
             >
               Join
             </button>
           </div>
         </form>
+
+        <div name="modal-form" class="visually-hidden" data-wellcome>
+          <h2 class="modal-authentication__title">Wellcome!</h2>
+          <p class="modal__text visually-hidden">
+            Now you can add your item to favorites
+          </p>
+        </div>
 
         <div id="login-form" style="margin-bottom: 20px; display: none">
           <h2 style="margin-bottom: 20px">Login</h2>
@@ -116,15 +128,20 @@
         </div>
       </section>
 
-      <button
-        type="button"
-        class="modal__close"
-        data-modal-authentication-close
-      >
-        <svg class="modal__close__icon">
-          <use class="use-heart1" href="./images/icons.svg#icon-close"></use>
+      <button type="button" class="modal__close" data-modal-close>
+        <svg class="modal__close__icon" data-modal-close>
+          <use
+            class="use-heart1"
+            href="./images/icons.svg#icon-close"
+            data-modal-close
+          ></use>
         </svg>
       </button>
+
+      <div
+        class="modal-authentication__loader visually-hidden"
+        data-modal-authentication-loader
+      ></div>
     </div>
   </div>
 </section>
