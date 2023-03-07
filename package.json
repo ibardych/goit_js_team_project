@@ -22,9 +22,9 @@
     "body-scroll-lock": "^4.0.0-beta.0",
     "custom-select": "^1.1.15",
     "firebase": "^9.17.2",
+    "lodash.throttle": "^4.1.1",
     "modern-normalize": "^1.1.0",
-    "perfect-scrollbar": "^1.5.5",
-    "lodash.throttle": "^4.1.1"
+    "perfect-scrollbar": "^1.5.5"
   },
   "devDependencies": {
     "@parcel/transformer-sass": "^2.6.0",
