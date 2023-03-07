@@ -50,6 +50,7 @@
 
 .modal__close {
   position: absolute;
+  z-index: 2;
   padding: 7px;
   top: 16px;
   right: 16px;

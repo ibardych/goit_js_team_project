@@ -7,7 +7,6 @@ const refs = {
   galleryListEl: document.querySelector('.gallery-list'),
   modal: document.querySelector('[data-modal-cocktail]'),
   modalWindow: document.querySelector('[data-modal-cocktail-window]'),
-  modalBts: document.querySelector('[data-modal-cocktail-buttons]'),
   modalContentEl: document.querySelector('[data-modal-cocktail-content]'),
 };
 
@@ -22,7 +21,6 @@ refs.galleryListEl.addEventListener('click', e => {
 
     requestCocktail({ cocktailId: cocktailId })
       .then(response => {
-        refs.modalBts.classList.remove('visually-hidden');
         renderContent(response.data.drinks[0]);
       })
       .catch(error => {

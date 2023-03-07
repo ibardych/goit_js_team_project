@@ -1,8 +1,9 @@
+import { addDataToFirebase } from './firebase';
+
 const refs = {
   addRemoveFavoriteBtns: document.querySelectorAll(
     '[data-add-remove-favorite]'
   ),
-  modalAuthentication: document.querySelector('[data-modal-authentication]'),
 };
 
 document.body.addEventListener('click', e => {
@@ -31,11 +32,36 @@ document.body.addEventListener('click', e => {
 
 const addRemoveFavorite = targetElement => {
   const buttonState = 'add';
+  const elementType = targetElement.getAttribute('data-element-type');
   const cocktailId = targetElement.getAttribute('data-cocktailid');
+  const ingredientId = targetElement.getAttribute('data-ingredientid');
 
-  checkIfUserLoggedIn();
-};
+  let elementTitle;
+  let elementData;
 
-const checkIfUserLoggedIn = () => {
-  refs.modalAuthentication.classList.toggle('is-hidden');
+  if (elementType == 'cocktail') {
+    const el = document.querySelector(`#cocktail-${cocktailId}`);
+    const titleEl = document.querySelector(
+      `#cocktail-${cocktailId} .gallery-item__title`
+    );
+    elementData = el.outerHTML;
+    elementTitle = titleEl.textContent;
+  }
+
+  if (elementType == 'ingredient') {
+    const titleEl = document.querySelector(
+      `#ingredient-${ingredientId} .modal-ingr__title`
+    );
+    elementTitle = titleEl.textContent;
+  }
+
+  const data = {
+    elementType,
+    elementTitle,
+    cocktailId,
+    ingredientId,
+    elementData,
+  };
+
+  addDataToFirebase(data);
 };
