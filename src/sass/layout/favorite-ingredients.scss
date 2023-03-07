@@ -1,0 +1,29 @@
+.favorite-title {
+ font-family: 'Poppins';
+ font-weight: 600;
+ font-size: 22px;
+ line-height: 1.9;
+ color: $black-color;
+
+ display: flex;
+ text-align: center;
+ justify-content: center;
+ padding-top: 60px;
+ margin-bottom: 60px;
+
+ @include for-size(tablet) {
+ font-weight: 700;
+ font-size: 32px;
+ line-height: 1.2;
+ margin-bottom: 80px;
+ padding-top: 61px;
+  }
+
+  @include for-size(desktop) {
+ font-weight: 700;
+ font-size: 48px;
+ line-height: 1.5;
+ margin-bottom: 40px;
+ padding-top: 69px;
+  }
+}
