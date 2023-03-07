@@ -3,6 +3,7 @@ import { markupGallery } from './common/general';
 
 const galleryEl = document.querySelector('.gallery-list');
 
+
 async function createGallery() {
   const promisesGallery = [];
 
@@ -13,6 +14,9 @@ async function createGallery() {
   const results = await Promise.all(promisesGallery);
 
   galleryEl.innerHTML = markupGallery(results);
-}
+ }
 
 createGallery();
+
+
+
