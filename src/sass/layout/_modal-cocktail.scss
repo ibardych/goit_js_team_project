@@ -18,6 +18,10 @@
     }
   }
 
+  &__content {
+    width: 100%;
+  }
+
   &__title {
     margin-bottom: 20px;
 
@@ -135,6 +139,14 @@
   &__tabinstructions {
     padding: 28px 179px 0 28px;
   }
+
+  &-button-wrapper {
+    @include for-size(tablet) {
+      padding: 0 28px 28px 0;
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
 }
 
 .sub-ingredients {
@@ -169,12 +181,4 @@
   background-color: #fd5103;
   color: white;
   font-weight: 400;
-}
-
-.modal-button-wrapper {
-  @include for-size(tablet) {
-    padding: 0 28px 28px 0;
-    display: flex;
-    justify-content: flex-end;
-  }
 }

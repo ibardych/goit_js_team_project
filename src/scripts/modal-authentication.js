@@ -1,5 +1,4 @@
 const refs = {
-  openModalBtn: document.querySelector('[data-modal-authentication-open]'),
   closeModalBtn: document.querySelector('[data-modal-authentication-close]'),
   modal: document.querySelector('[data-modal-authentication]'),
   joinModalBtn: document.querySelector('[data-modal-authentication-join]'),
@@ -7,10 +6,6 @@ const refs = {
   loginForm: document.querySelector('#login-form'),
   joinForm: document.querySelector('#join-form'),
 };
-
-refs.openModalBtn.addEventListener('click', () => {
-  refs.modal.classList.toggle('is-hidden');
-});
 
 refs.closeModalBtn.addEventListener('click', () => {
   refs.modal.classList.toggle('is-hidden');

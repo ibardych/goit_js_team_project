@@ -9,3 +9,6 @@ import './scripts/footer';
 import './hero_js/hero_index';
 import './hero_js/hero_api';
 import './scripts/gallery';
+
+// CSS from libraries
+import 'perfect-scrollbar/css/perfect-scrollbar.css';

@@ -1,7 +1,5 @@
 import { disableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 import { disableBodyScroll } from 'body-scroll-lock';
-import PerfectScrollbar from 'perfect-scrollbar';
-import 'perfect-scrollbar/css/perfect-scrollbar.css';
 
 const modals = document.querySelectorAll('.modal');
 
@@ -9,21 +7,15 @@ modals.forEach(modal => {
   modal.addEventListener('click', e => {
     if (e.target.hasAttribute('data-modal-close')) {
       modal.classList.toggle('is-hidden');
-      modal.style.borderRight = `solid 0px rgb(0 0 0 / 0)`;
+      modal.firstElementChild.style.paddingRight = `0px`;
       clearAllBodyScrollLocks();
     }
     if (e.target.hasAttribute('data-modal')) {
-      modal.classList.toggle('is-hidden');
-      modal.style.borderRight = `solid 0px rgb(0 0 0 / 0)`;
+      //modal.classList.toggle('is-hidden');
+      modal.firstElementChild.style.paddingRight = `0px`;
       clearAllBodyScrollLocks();
     }
   });
-});
-
-const modalWindows = document.querySelectorAll('.modal__window');
-
-modalWindows.forEach(modal => {
-  const psModal = new PerfectScrollbar(modal);
 });
 
 const checkWindowWidth = () => {
@@ -35,7 +27,7 @@ const checkWindowWidth = () => {
   const modals = document.querySelectorAll('.modal');
 
   modals.forEach(modal => {
-    modal.style.borderRight = `solid ${scrollBarWidth}px rgb(0 0 0 / 0)`;
+    modal.firstElementChild.style.paddingRight = `${scrollBarWidth}px`;
   });
 };
 
