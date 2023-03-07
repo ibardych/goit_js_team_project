@@ -52,7 +52,9 @@
 .theme-wrapper-mob {
   display: flex;
   align-items: center;
-  margin-right: 152px;
+  @include for-size(tablet) {
+    margin-right: 152px;
+  }
 }
 .light-theme-mob {
   font-style: normal;
