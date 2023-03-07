@@ -7,7 +7,6 @@ const refs = {
   modalContentEl: document.querySelector('[data-modal-ingredient-content]'),
   modal: document.querySelector('[data-modal-ingredient]'),
   modalCocktail: document.querySelector('.modal-cocktail'),
-  modalBts: document.querySelector('[data-modal-ingredient-buttons]'),
 };
 
 const psModal = new PerfectScrollbar(refs.modalWindow);
@@ -23,7 +22,6 @@ refs.modalCocktail.addEventListener('click', e => {
   // const ingredientName = btn.dataset.ingredientid;
   requestIngredient({ ingredientName: ingredientName })
     .then(response => {
-      refs.modalBts.classList.remove('visually-hidden');
       renderContent(response.data.ingredients[0]);
     })
     .catch(error => {
