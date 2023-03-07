@@ -12,10 +12,14 @@ document.body.addEventListener('click', e => {
   if (e.target.hasAttribute('data-add-remove-favorite')) {
     targetElement = e.target;
   }
-  if (e.target.parentElement.hasAttribute('data-add-remove-favorite')) {
+  if (
+    e.target.parentElement &&
+    e.target.parentElement.hasAttribute('data-add-remove-favorite')
+  ) {
     targetElement = e.target.parentElement;
   }
   if (
+    e.target.parentElement.parentElement &&
     e.target.parentElement.parentElement.hasAttribute(
       'data-add-remove-favorite'
     )

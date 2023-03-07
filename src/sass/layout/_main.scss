@@ -22,12 +22,11 @@
   color: $black-color;
 
   @include for-size(tablet) {
-    display: none;
+    font-size: 32px;
+    line-height: 1.3;
   }
 
   @include for-size(desktop) {
-    display: block;
-
     font-weight: 700;
     font-size: 48px;
     line-height: 1.5;

@@ -2,7 +2,7 @@
   <div class="container">
     <h1 class="gallery-title gallery-title_margin">Cocktails</h1>
     <ul class="gallery-list">
-      <div class="gallery-loading"> 
+      <div class="gallery-loading">
         <div data-loader="" class="loader-type1">
           <!-- не можна вкладати дів в юл -->
           <div></div>
@@ -24,5 +24,31 @@
     <div class="gallery-error"></div>
     <button type="button" class="next-button">Next</button>
   </div>
-  
+  <div class="error-section">
+    <picture>
+      <source
+        srcset="./images/error-photo-mobile.png"
+        type="image/png"
+        media="(max-width: 767px)"
+      />
+
+      <source
+        srcset="./images/error-photo-tablet.png"
+        type="image/png"
+        media="(min-width: 768px) and (max-width: 1199px)"
+      />
+
+      <source
+        srcset="./images/error-photo-tablet.png"
+        type="image/png"
+        media="(min-width: 1200px)"
+      />
+
+      <img
+        class="error-png error-png_margin"
+        src="./images/error-photo-mobile.png"
+        alt="error image"
+      />
+    </picture>
+  </div>
 </section>

@@ -12,6 +12,7 @@ import {
   getAddedMessagePattern,
   getRemovedMessagePattern,
   loaderPattern,
+  getFavoriteIngredientPattern,
 } from './common/patterns';
 import { checkWindowWidth } from './common/modals';
 
@@ -87,16 +88,14 @@ auth.onAuthStateChanged(user => {
 const nodeRef = ref(db, `favorites`);
 
 onValue(nodeRef, snapshot => {
-  if (window.location.pathname == '/favorite-cocktails.html') {
-    const user = auth.currentUser;
+  const user = auth.currentUser;
+  const galleryList = document.querySelector('.gallery-list');
+  const data = snapshot.val();
+  const markupData = [];
 
-    const galleryList = document.querySelector('.gallery-list');
-
-    const data = snapshot.val();
-
-    for (uid in data) {
-      if (user.uid == uid) {
-        const markupData = [];
+  for (uid in data) {
+    if (user.uid == uid) {
+      if (window.location.pathname == '/favorite-cocktails.html') {
         const cocktails = data[uid].cocktails;
         if (cocktails) {
           for (const cocktailid in cocktails) {
@@ -114,9 +113,28 @@ onValue(nodeRef, snapshot => {
           btn.setAttribute('data-action', 'delete');
         });
       }
+
+      if (window.location.pathname == '/favorite-ingredients.html') {
+        const ingredients = data[uid].ingredients;
+        if (ingredients) {
+          for (const ingredientid in ingredients) {
+            const ingredientData = {
+              id: ingredientid,
+              title: ingredients[ingredientid].title,
+              subtitle: ingredients[ingredientid].subtitle,
+            };
+            console.log(ingredientData);
+
+            const markup = getFavoriteIngredientPattern(ingredientData);
+
+            markupData.push(markup);
+          }
+        }
+
+        galleryList.innerHTML = markupData.join('');
+      }
     }
   }
-
   //console.log(data);
   //updateStarCount(postElement, data);
 });

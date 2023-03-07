@@ -33,7 +33,7 @@ export function onLetterClick(evt) {
   }
 
   const currentLetter = evt.target.textContent;
-  const requestedInfo = createRequstByLetter(currentLetter).then(data =>
+  createRequstByLetter(currentLetter).then(data =>
     galleryCardsRender(data.drinks)
   );
 }
@@ -44,7 +44,7 @@ export function onLetterChoose(evt) {
   const selectedOptionText = selectedOption.textContent;
 
   createRequstByLetter(selectedOptionText).then(data =>
-    console.log(markupGallery(data.drinks))
+    galleryCardsRender(data.drinks)
   );
 }
 
@@ -55,8 +55,8 @@ function galleryCardsRender(data) {
     return;
   }
   galleryError.innerHTML = '';
-  //   galleryEl.innerHTML = markupGalleryTwo(data);
-  const dataSource = markupGalleryTwo(data);
+  galleryEl.innerHTML = markupGallery(data);
+  //   const dataSource = markupGallery(data);
   //   console.log(dataSource);
 
   //     const options = {
@@ -74,14 +74,15 @@ function galleryCardsRender(data) {
   //       const paginationContainer = document.getElementById('pagination-container');
   //       const paginationInstance = new Pagination(paginationContainer, options);
 
-  const container = document.getElementById('pagination-container');
+  // const container = document.getElementById('pagination-container');
 
-  const options = {
-    totalItems: 100,
-    itemsPerPage: 10,
-    visiblePages: 5,
-    centerAlign: true,
-  };
+  // const options = {
+  //   totalItems: 100,
+  //   itemsPerPage: 10,
+  //   visiblePages: 5,
+  //   centerAlign: true,
+  // };
 
-  const pagination = new Pagination(container, options);
+  // const pagination = new Pagination(container, options);
+  // }
 }
