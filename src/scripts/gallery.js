@@ -15,4 +15,8 @@ async function createGallery() {
   galleryEl.innerHTML = markupGallery(results);
 }
 
-createGallery();
+const uri = window.location.pathname;
+
+if (uri == '/' || uri == '/index.html') {
+  createGallery();
+}

@@ -64,12 +64,12 @@ const getCocktailPattern = ({
         <!--------- Add to favorite button --------->
         <button
           type="button"
-          class="button-favorite button-modal-cocktail"
+          class="button-more button-modal-cocktail"
           data-add-remove-favorite
           data-cocktailid="${id}"
           data-element-type="cocktail"
         >
-          <span>Add to favorite</span>
+          Add to favorite
         </button>
         <!--------- Add to favorite button --------->
       </div>
@@ -92,11 +92,11 @@ const getIngredientPattern = ({
   const pattern1 = `
     <div class="modal-ingr__content" id="ingredient-${id}">
       <h2 class="modal-ingr__title">${title}</h2>
-      <h3 class="modal-ingr__subtitle">subtitle</h3>
+      <h3 class="modal-ingr__subtitle">${type || ''}</h3>
       <div class="modal-ingr__horiontal-line"></div>
       <div>
         <p class="modal-ingr__description">
-          ${description}
+          ${description || ''}
         </p>
         <ul class="modal-ingr__list">
   `;
@@ -190,10 +190,18 @@ const getAddedMessagePattern = ({ type, name }) => {
   `;
 };
 
+const getRemovedMessagePattern = ({ type, name }) => {
+  const text = type == 'cocktail' ? 'Cocktail' : 'Ingredient';
+  return `
+    ${text} <strong>${name}</strong> removed from your favorites.
+  `;
+};
+
 export {
   getCocktailPattern,
   getIngredientPattern,
   loaderPattern,
   getUserAreaPattern,
   getAddedMessagePattern,
+  getRemovedMessagePattern,
 };

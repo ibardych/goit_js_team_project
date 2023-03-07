@@ -1,6 +1,5 @@
 import { requestCocktail } from './requests';
 import { getCocktailPattern, loaderPattern } from './common/patterns';
-import { checkWindowWidth } from './common/modals';
 import PerfectScrollbar from 'perfect-scrollbar';
 
 const refs = {
@@ -56,6 +55,4 @@ const renderContent = data => {
 
 const finalizeModal = () => {
   psModal.update();
-
-  checkWindowWidth();
 };

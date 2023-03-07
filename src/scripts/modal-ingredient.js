@@ -9,7 +9,10 @@ const refs = {
   modalCocktail: document.querySelector('.modal-cocktail'),
 };
 
-const psModal = new PerfectScrollbar(refs.modalWindow);
+const psModal = new PerfectScrollbar(refs.modalWindow, {
+  wheelSpeed: 0.1,
+  swipeEasing: 'linear',
+});
 
 refs.modalCocktail.addEventListener('click', e => {
   if (!e.target.hasAttribute('data-ingredientname')) return;

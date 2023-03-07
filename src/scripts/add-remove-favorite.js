@@ -1,4 +1,4 @@
-import { addDataToFirebase } from './firebase';
+import { updateDataInFirebase } from './firebase';
 
 const refs = {
   addRemoveFavoriteBtns: document.querySelectorAll(
@@ -7,8 +7,6 @@ const refs = {
 };
 
 document.body.addEventListener('click', e => {
-  e.preventDefault();
-
   let targetElement;
 
   if (e.target.hasAttribute('data-add-remove-favorite')) {
@@ -35,9 +33,12 @@ const addRemoveFavorite = targetElement => {
   const elementType = targetElement.getAttribute('data-element-type');
   const cocktailId = targetElement.getAttribute('data-cocktailid');
   const ingredientId = targetElement.getAttribute('data-ingredientid');
+  const action = targetElement.getAttribute('data-action') || 'add';
 
   let elementTitle;
+  let elementSubtitle;
   let elementData;
+  let elementId;
 
   if (elementType == 'cocktail') {
     const el = document.querySelector(`#cocktail-${cocktailId}`);
@@ -46,22 +47,34 @@ const addRemoveFavorite = targetElement => {
     );
     elementData = el.outerHTML;
     elementTitle = titleEl.textContent;
+    elementId = cocktailId;
   }
 
   if (elementType == 'ingredient') {
     const titleEl = document.querySelector(
       `#ingredient-${ingredientId} .modal-ingr__title`
     );
+    const subTitleEl = document.querySelector(
+      `#ingredient-${ingredientId} .modal-ingr__subtitle`
+    );
     elementTitle = titleEl.textContent;
+    elementSubtitle = subTitleEl.textContent;
+    elementId = ingredientId;
   }
 
   const data = {
+    action: action,
     elementType,
     elementTitle,
-    cocktailId,
-    ingredientId,
+    elementSubtitle,
+    elementId,
     elementData,
+    targetElement,
   };
 
-  addDataToFirebase(data);
+  const response = updateDataInFirebase(data);
+
+  if (response == 'successfully') {
+    alert('test');
+  }
 };

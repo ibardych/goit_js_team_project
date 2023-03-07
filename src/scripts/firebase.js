@@ -10,6 +10,7 @@ import { getDatabase, ref, set, remove, onValue } from 'firebase/database';
 import {
   getUserAreaPattern,
   getAddedMessagePattern,
+  getRemovedMessagePattern,
   loaderPattern,
 } from './common/patterns';
 import { checkWindowWidth } from './common/modals';
@@ -82,26 +83,43 @@ auth.onAuthStateChanged(user => {
 });
 
 // Retrieve data from the node once
-const nodeRef = ref(db, 'coctails');
+
+const nodeRef = ref(db, `favorites`);
 
 onValue(nodeRef, snapshot => {
-  const data = snapshot.val();
+  if (window.location.pathname == '/favorite-cocktails.html') {
+    const user = auth.currentUser;
 
-  for (key in data) {
-    const v = data[key][1];
-    //console.log(v);
+    const galleryList = document.querySelector('.gallery-list');
+
+    const data = snapshot.val();
+
+    for (uid in data) {
+      if (user.uid == uid) {
+        const markupData = [];
+        const cocktails = data[uid].cocktails;
+        if (cocktails) {
+          for (const cocktailid in cocktails) {
+            markupData.push(cocktails[cocktailid].data);
+          }
+        }
+
+        galleryList.innerHTML = markupData.join('');
+
+        const allButtons = document.querySelectorAll(
+          '[data-add-remove-favorite]'
+        );
+        allButtons.forEach(btn => {
+          btn.firstElementChild.textContent = 'Remove';
+          btn.setAttribute('data-action', 'delete');
+        });
+      }
+    }
   }
 
   //console.log(data);
   //updateStarCount(postElement, data);
 });
-
-var saveBtn = document.getElementById('save-btn');
-var deleteBtn = document.getElementById('delete-btn');
-var emailInput = document.getElementById('email');
-var passwordInput = document.getElementById('password');
-var emailInput1 = document.getElementById('email1');
-var passwordInput1 = document.getElementById('password1');
 
 refs.joinBtn.addEventListener('click', function () {
   refs.modalLoader.innerHTML = loaderPattern;
@@ -152,29 +170,6 @@ refs.loginBtn.addEventListener('click', function () {
       console.error('Error signing in:', errorMessage);
     })
     .finally(refs.modalLoader.classList.toggle('visually-hidden'));
-});
-
-saveBtn.addEventListener('click', function () {
-  const user = auth.currentUser;
-
-  console.log(user);
-
-  const taskRef = ref(db, `coctails/${user.uid}/3`);
-  set(taskRef, {
-    title: 'Margarita3',
-    description: 'Text3іввіа',
-    assignedUser: user.uid,
-  });
-  console.log('Data added to database!');
-});
-
-deleteBtn.addEventListener('click', function () {
-  const user = auth.currentUser;
-
-  const taskRef = ref(db, `coctails/${user.uid}/3`);
-
-  remove(taskRef);
-  console.log('Data removed from database!');
 });
 
 () => {
@@ -230,25 +225,72 @@ function logout() {
     });
 }
 
-function addDataToFirebase({
+async function updateDataInFirebase({
+  action,
   elementType,
   elementTitle,
-  cocktailId,
-  ingredietId,
+  elementSubtitle,
+  elementId,
   elementData,
+  targetElement,
 }) {
-  auth.onAuthStateChanged(user => {
-    const cocktailname = 'Test';
-    if (user) {
-      refs.modalSuccessfullContent.innerHTML = getAddedMessagePattern({
-        type: elementType,
-        name: elementTitle,
-      });
-      refs.modalSuccessfull.classList.toggle('is-hidden');
-    } else {
-      refs.modalAuthentication.classList.toggle('is-hidden');
+  const user = auth.currentUser;
+
+  if (user) {
+    const taskRef = ref(
+      db,
+      `favorites/${user.uid}/${elementType}s/${elementId}`
+    );
+
+    try {
+      if (action == 'add') {
+        await set(taskRef, {
+          title: elementTitle,
+          subtitle: elementSubtitle || '',
+          data: elementData || '',
+        });
+
+        refs.modalSuccessfullContent.innerHTML = getAddedMessagePattern({
+          type: elementType,
+          name: elementTitle,
+        });
+
+        if (targetElement.firstElementChild) {
+          targetElement.firstElementChild.innerHTML = 'Remove';
+        } else {
+          targetElement.innerHTML = 'Remove from favorite';
+        }
+
+        targetElement.setAttribute('data-action', 'delete');
+
+        console.log('Data successfully written to Firestore!');
+      }
+
+      if (action == 'delete') {
+        await remove(taskRef);
+
+        refs.modalSuccessfullContent.innerHTML = getRemovedMessagePattern({
+          type: elementType,
+          name: elementTitle,
+        });
+
+        if (targetElement.firstElementChild) {
+          targetElement.firstElementChild.innerHTML = 'Add to';
+        } else {
+          targetElement.innerHTML = 'Add to favorite';
+        }
+        targetElement.setAttribute('data-action', 'ad');
+
+        console.log('Data successfully removed from Firestore!');
+      }
+    } catch (error) {
+      console.error('Error writing document: ', error);
     }
-  });
+
+    refs.modalSuccessfull.classList.toggle('is-hidden');
+  } else {
+    refs.modalAuthentication.classList.toggle('is-hidden');
+  }
 }
 
-export { addDataToFirebase };
+export { updateDataInFirebase };
