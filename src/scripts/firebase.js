@@ -100,7 +100,7 @@ auth.onAuthStateChanged(user => {
     const data = snapshot.val();
     const markupData = [];
 
-    for (uid in data) {
+    for (const uid in data) {
       if (user.uid == uid) {
         if (window.location.pathname == '/favorite-cocktails.html') {
           const cocktails = data[uid].cocktails;
