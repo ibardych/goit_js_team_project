@@ -18,10 +18,32 @@
 
   &__button {
     margin-left: 10px;
+
+    &-big {
+      border-radius: 4px;
+      padding: 6px 20px;
+      font-size: 16px;
+      line-height: 1.4;
+    }
   }
 
   &__email {
     color: $grapefruit-color;
     @include transition(opacity);
+  }
+}
+
+.not-athorized {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding-top: 20px;
+  font-size: 16px;
+  flex-wrap: wrap;
+
+  @include for-size(tablet) {
+    font-size: 20px;
   }
 }

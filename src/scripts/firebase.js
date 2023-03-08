@@ -18,6 +18,11 @@ import {
   outputPaginationIngredients,
 } from './common/general';
 
+const nomalizeURI = window.location.pathname.replace(
+  '/goit_js_team_project',
+  ''
+);
+
 const refs = {
   userAreaEl: document.querySelector('[data-user-area]'),
   modalAuthentication: document.querySelector('[data-modal-authentication]'),
@@ -33,6 +38,8 @@ const refs = {
   ),
   errorSection: document.querySelector('[data-error-section]'),
   galleryList: document.querySelector('.gallery-list'),
+  galleryTitle: document.querySelector('h1.gallery-title'),
+  paginationEl: document.querySelector('#tui-pagination-container'),
 };
 
 refs.userAreaEl.addEventListener('click', e => {
@@ -68,6 +75,9 @@ auth.onAuthStateChanged(user => {
     const displayName = user.displayName;
     const photoURL = user.photoURL;
 
+    const notAuthorizedEl = document.querySelector('[data-not-athorize]');
+    if (notAuthorizedEl) notAuthorizedEl.classList.add('visually-hidden');
+
     refs.userAreaEl.innerHTML = getUserAreaPattern({
       email: user.email,
       authorized: true,
@@ -78,22 +88,44 @@ auth.onAuthStateChanged(user => {
       .addEventListener('click', () => {
         logout();
       });
-
-    //console.log('Signed in user:', uid, email);
   } else {
     refs.userAreaEl.innerHTML = getUserAreaPattern({});
 
-    // refs.galleryList.innerHTML = '';
-    // refs.errorSection.classList.add('visually-hidden');
-    // No user is signed in
-    //console.log('No user is signed in.');
+    if (
+      nomalizeURI === '/favorite-cocktails.html' ||
+      nomalizeURI === '/favorite-ingredients.html'
+    ) {
+      refs.galleryList.innerHTML = `
+        <div class="not-athorized" data-not-athorized>
+          You are not authorized
+          <button class="button-authorization user__button-big" type="button" data-login-btn>
+            Login
+          </button>
+        </div>
+      `;
+
+      const loginButton = document.querySelector('[data-login-btn]');
+
+      loginButton.addEventListener('click', e => {
+        login();
+      });
+    }
   }
 });
 
-// Retrieve data from the node once
+function hideNotAuthorizedMessage() {
+  const notAuthorizedEl = document.querySelector('[data-not-athorized]');
+  notAuthorizedEl.classList.add('visually-hidden');
+
+  if (
+    nomalizeURI === '/favorite-cocktails.html' ||
+    nomalizeURI === '/favorite-ingredients.html'
+  ) {
+    location.reload();
+  }
+}
 
 const nodeRef = ref(db, `favorites`);
-
 onValue(nodeRef, snapshot => {
   const user = auth.currentUser;
   const data = snapshot.val();
@@ -101,10 +133,6 @@ onValue(nodeRef, snapshot => {
 
   for (const uid in data) {
     if (user.uid === uid) {
-      const nomalizeURI = window.location.pathname.replace(
-        '/goit_js_team_project',
-        ''
-      );
       if (nomalizeURI === '/favorite-cocktails.html') {
         const cocktails = data[uid].cocktails;
         if (cocktails) {
@@ -118,6 +146,35 @@ onValue(nodeRef, snapshot => {
             markupData.push(cocktailData);
           }
         }
+
+        if (!markupData) {
+          refs.galleryList.innerHTML = ``;
+          refs.galleryTitle.classList.add('visually-hidden');
+          refs.galleryList.classList.add('visually-hidden');
+          refs.errorSection.classList.remove('visually-hidden');
+          refs.paginationEl.classList.add('visually-hidden');
+          return;
+        }
+
+        refs.galleryList.innerHTML = `
+          <div class="gallery-loading">
+            <div data-loader="" class="loader-type1">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+          </div>
+        `;
+
         outputPagination(markupData);
 
         const allButtons = document.querySelectorAll(
@@ -145,9 +202,35 @@ onValue(nodeRef, snapshot => {
           }
         }
 
-        outputPaginationIngredients(markupData);
+        if (!markupData) {
+          refs.galleryList.innerHTML = ``;
+          refs.galleryTitle.classList.add('visually-hidden');
+          refs.galleryList.classList.add('visually-hidden');
+          refs.errorSection.classList.remove('visually-hidden');
+          refs.paginationEl.classList.add('visually-hidden');
+          return;
+        }
 
-        // refs.galleryList.innerHTML = markupData.join('');
+        refs.galleryList.innerHTML = `
+          <div class="gallery-loading">
+            <div data-loader="" class="loader-type1">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+          </div>
+        `;
+
+        outputPaginationIngredients(markupData);
       }
     }
   }
@@ -162,15 +245,15 @@ refs.joinBtn.addEventListener('click', function () {
 
   createUserWithEmailAndPassword(auth, email, password)
     .then(userCredential => {
-      // User account created successfully
       const user = userCredential.user;
       console.log('User account created:', user.uid);
 
       refs.wellcomeEl.classList.toggle('visually-hidden');
       refs.joinForm.classList.toggle('visually-hidden');
+      hideNotAuthorizedMessage();
+      location.reload();
     })
     .catch(error => {
-      // An error occurred while creating user account
       const errorCode = error.code;
       const errorMessage = error.message;
       console.error('Error creating user account:', errorMessage);
@@ -188,15 +271,14 @@ refs.loginBtn.addEventListener('click', function () {
 
   signInWithEmailAndPassword(auth, email, password)
     .then(userCredential => {
-      // User signed in successfully
       const user = userCredential.user;
       console.log('User signed in:', user.uid);
 
       refs.wellcomeEl.classList.toggle('visually-hidden');
       refs.loginForm.classList.toggle('visually-hidden');
+      hideNotAuthorizedMessage();
     })
     .catch(error => {
-      // An error occurred while signing in
       const errorCode = error.code;
       const errorMessage = error.message;
       console.error('Error signing in:', errorMessage);
@@ -210,7 +292,6 @@ refs.loginBtn.addEventListener('click', function () {
       const uid = user.uid;
     } else {
       // User is signed out
-      // ...
     }
   });
 };
@@ -227,7 +308,6 @@ function logout() {
       refs.userAreaEl.innterHTML = getUserAreaPattern({});
     })
     .catch(error => {
-      // An error occurred while signing out
       console.error('Error signing out:', error);
     });
 }
