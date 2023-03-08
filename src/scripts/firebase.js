@@ -124,8 +124,10 @@ onValue(nodeRef, snapshot => {
           '[data-add-remove-favorite]'
         );
         allButtons.forEach(btn => {
-          btn.firstElementChild.textContent = 'Remove';
-          btn.setAttribute('data-action', 'delete');
+          if (btn.firstElementChild) {
+            btn.firstElementChild.textContent = 'Remove';
+            btn.setAttribute('data-action', 'delete');
+          }
         });
       }
 

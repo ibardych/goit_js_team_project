@@ -40,7 +40,7 @@ const getFirebaseDataByUser = async () => {
       const data = snapshot.val();
 
       for (const uid in data) {
-        if (user.uid === uid) {
+        if (user && user.uid === uid) {
           const cocktails = data[uid].cocktails;
           if (cocktails) favorites.cocktails = cocktails;
 
