@@ -30,8 +30,12 @@ const getFirebaseDataByUser = async () => {
   const nodeRef = ref(db, `favorites`);
 
   return new Promise((resolve, reject) => {
+    const user = auth.currentUser;
+    if (!user) {
+      reject();
+    }
+
     onValue(nodeRef, snapshot => {
-      const user = auth.currentUser;
       const data = snapshot.val();
 
       for (const uid in data) {
@@ -57,11 +61,11 @@ function checkUserStatus(callback, galleryElements) {
 
   console.log(userDataPromise);
 
-  userDataPromise.then(userData => {
-    callback(userData, galleryElements);
-  });
-
-  callback({}, galleryElements);
+  userDataPromise
+    .then(userData => {
+      callback(userData, galleryElements);
+    })
+    .catch(() => callback([], galleryElements));
 }
 
 function createGalleryElements(userData, galleryElements) {
