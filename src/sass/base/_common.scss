@@ -8,7 +8,7 @@ body {
   color: $black-color;
   line-height: 1.2;
   position: relative;
-  @include transition(background-color);
+  // @include transition(background-color);
 
   &.dark-mode {
     background-color: $black-color;
