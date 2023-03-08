@@ -1,11 +1,12 @@
 import { initializeApp } from 'firebase/app';
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signOut,
-} from 'firebase/auth';
-import { getDatabase, ref, set, remove, onValue } from 'firebase/database';
+import { getAuth } from 'firebase/auth';
+import { getDatabase, ref, onValue } from 'firebase/database';
+
+const refs = {
+  galleryList: document.querySelector('.gallery-list'),
+  paginationEl: document.querySelector('#tui-pagination-container'),
+  errorSection: document.querySelector('[data-error-section]'),
+};
 
 const firebaseConfig = {
   apiKey: 'AIzaSyCTBJG-qoCxnqY0kLartne6JuIMgO3rCtI',
@@ -103,6 +104,9 @@ function outputPaginationDo(allItems) {
   const totalItems = allItems.length;
   const itemsPerPage = getItemsPerPage();
 
+  const pagesNumber = Math.ceil(totalItems / itemsPerPage);
+  checkPaginationVisible(pagesNumber);
+
   options.totalItems = totalItems;
   options.itemsPerPage = itemsPerPage;
 
@@ -181,11 +185,6 @@ const options = {
   },
 };
 
-const refs = {
-  galleryList: document.querySelector('.gallery-list'),
-  paginationEl: document.querySelector('#tui-pagination-container'),
-};
-
 // function outputPagination(drinks) {
 //   markupGalleryTwo(drinks).then(allItems => {
 //     outputPaginationData(allItems);
@@ -228,8 +227,17 @@ function outputPaginationData(allItems) {
 }
 
 function checkPaginationVisible(pagesNumber) {
-  if (pagesNumber > 1) refs.paginationEl.classList.remove('visually-hidden');
-  else refs.paginationEl.classList.add('visually-hidden');
+  if (pagesNumber > 1) {
+    refs.paginationEl.classList.remove('visually-hidden');
+  } else {
+    refs.paginationEl.classList.add('visually-hidden');
+  }
+
+  if (pagesNumber) {
+    refs.errorSection.classList.add('visually-hidden');
+  } else {
+    refs.errorSection.classList.add('visually-hidden');
+  }
 }
 
 function getItemsPerPage() {

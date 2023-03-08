@@ -84,8 +84,8 @@ auth.onAuthStateChanged(user => {
   } else {
     refs.userAreaEl.innerHTML = getUserAreaPattern({});
 
-    refs.galleryList.innerHTML = '';
-    refs.errorSection.classList.toggle('visually-hidden');
+    // refs.galleryList.innerHTML = '';
+    // refs.errorSection.classList.add('visually-hidden');
     // No user is signed in
     //console.log('No user is signed in.');
   }

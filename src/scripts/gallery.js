@@ -13,10 +13,6 @@ function createGallery() {
   Promise.all(promisesGallery)
     .then(data => {
       outputPagination(data);
-
-      // markupGallery(data).then(data => {
-      //   galleryEl.innerHTML = data;
-      // });
     })
     .catch();
 }
