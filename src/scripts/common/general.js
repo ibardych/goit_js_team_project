@@ -54,6 +54,8 @@ import Pagination from 'tui-pagination';
 function checkUserStatus(callback, galleryElements) {
   const userDataPromise = getFirebaseDataByUser();
 
+  console.log(userDataPromise);
+
   userDataPromise.then(userData => {
     callback(userData, galleryElements);
   });
