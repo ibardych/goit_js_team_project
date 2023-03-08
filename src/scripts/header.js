@@ -1,39 +1,6 @@
 import { requestCocktails } from './requests';
-import { markupGalleryTwo } from './common/general';
 import { loaderPattern } from './common/patterns';
-import Pagination from 'tui-pagination';
-
-import 'tui-pagination/dist/tui-pagination.css';
-
-const container = document.getElementById('tui-pagination-container');
-
-const options = {
-  // below default value of options
-  totalItems: 0,
-  itemsPerPage: 6,
-  visiblePages: 5,
-  page: 1,
-  centerAlign: true,
-  firstItemClassName: 'tui-first-child',
-  lastItemClassName: 'tui-last-child',
-  template: {
-    page: '<a href="#" class="tui-page-btn">{{page}}</a>',
-    currentPage:
-      '<strong class="tui-page-btn tui-is-selected">{{page}}</strong>',
-    moveButton:
-      '<a href="#" class="tui-page-btn tui-{{type}}">' +
-      '<span class="tui-ico-{{type}}">{{type}}</span>' +
-      '</a>',
-    disabledMoveButton:
-      '<span class="tui-page-btn tui-is-disabled tui-{{type}}">' +
-      '<span class="tui-ico-{{type}}">{{type}}</span>' +
-      '</span>',
-    moreButton:
-      '<a href="#" class="tui-page-btn tui-{{type}}-is-ellip">' +
-      '<span class="tui-ico-ellip">...</span>' +
-      '</a>',
-  },
-};
+import { outputPagination } from './common/general';
 
 const refs = {
   searchForm: document.querySelector('form[name=search-form]'),
@@ -74,37 +41,8 @@ refs.searchForm.addEventListener('submit', e => {
       ).map(idDrink => {
         return allDrinks.find(obj => obj.idDrink === idDrink);
       });
-
-      const allItems = markupGalleryTwo(uniqueDrinks);
-      const totalItems = allItems.length;
-
-      const itemsPerPage = getItemsPerPage();
-
-      options.totalItems = totalItems;
-      options.itemsPerPage = itemsPerPage;
-      const pagination = new Pagination(container, options);
-
-      refs.galleryList.innerHTML = allItems.slice(0, itemsPerPage).join('');
-
-      pagination.on('afterMove', event => {
-        const currentPage = event.page;
-
-        const startKey = (currentPage - 1) * itemsPerPage;
-        const endKey = startKey + itemsPerPage;
-
-        const selectedItems = allItems.slice(startKey, endKey);
-
-        refs.galleryList.innerHTML = selectedItems.join('');
-      });
+      outputPagination(uniqueDrinks);
     })
     .catch(error => console.log(error))
     .finally();
 });
-
-function getItemsPerPage() {
-  const windowWidth = window.innerWidth;
-  let itemsPerPage = 3;
-  if (windowWidth >= 768) itemsPerPage = 6;
-  if (windowWidth >= 1280) itemsPerPage = 9;
-  return itemsPerPage;
-}

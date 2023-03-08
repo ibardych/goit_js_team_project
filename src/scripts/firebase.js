@@ -139,6 +139,29 @@ onValue(nodeRef, snapshot => {
   }
 });
 
+const getFirebaseDataByUser = () => {
+  let favorites = [];
+
+  const nodeRef = ref(db, `favorites`);
+
+  onValue(nodeRef, snapshot => {
+    const user = auth.currentUser;
+    const data = snapshot.val();
+
+    for (uid in data) {
+      if (user.uid == uid) {
+        const cocktails = data[uid].cocktails;
+        if (cocktails) favorites['cocktails'] = cocktails;
+
+        const ingredients = data[uid].ingredients;
+        if (ingredients) favorites['ingredients'] = ingredients;
+      }
+    }
+  });
+
+  return favorites;
+};
+
 refs.joinBtn.addEventListener('click', function () {
   refs.modalLoader.innerHTML = loaderPattern;
   refs.modalLoader.classList.toggle('visually-hidden');
@@ -309,4 +332,4 @@ async function updateDataInFirebase({
   }
 }
 
-export { updateDataInFirebase };
+export { updateDataInFirebase, getFirebaseDataByUser };
