@@ -12,11 +12,11 @@ const requestIngredient = ({ ingredientName }) => {
   );
 };
 
-async function getRundomCocktailes() {
-  const response = await axios.get(
-    'https://www.thecocktaildb.com/api/json/v1/1/random.php'
-  );
-  return response.data.drinks[0];
+function getRundomCocktailes() {
+  return axios
+    .get('https://www.thecocktaildb.com/api/json/v1/1/random.php')
+    .then(response => response.data.drinks[0])
+    .catch();
 }
 
 const requestCocktails = searchText => {
