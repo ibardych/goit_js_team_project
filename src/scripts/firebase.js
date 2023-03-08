@@ -14,6 +14,10 @@ import {
   loaderPattern,
   getFavoriteIngredientPattern,
 } from './common/patterns';
+import {
+  outputPaginationFirebase,
+  outputPaginationIngredients,
+} from './common/general';
 
 const refs = {
   userAreaEl: document.querySelector('[data-user-area]'),
@@ -106,7 +110,9 @@ onValue(nodeRef, snapshot => {
           }
         }
 
-        refs.galleryList.innerHTML = markupData.join('');
+        outputPaginationFirebase(markupData);
+
+        //refs.galleryList.innerHTML = markupData.join('');
 
         const allButtons = document.querySelectorAll(
           '[data-add-remove-favorite]'
@@ -127,13 +133,15 @@ onValue(nodeRef, snapshot => {
               subtitle: ingredients[ingredientid].subtitle,
             };
 
-            const markup = getFavoriteIngredientPattern(ingredientData);
+            //const markup = getFavoriteIngredientPattern(ingredientData);
 
-            markupData.push(markup);
+            markupData.push(ingredientData);
           }
         }
 
-        refs.galleryList.innerHTML = markupData.join('');
+        outputPaginationIngredients(markupData);
+
+        // refs.galleryList.innerHTML = markupData.join('');
       }
     }
   }
