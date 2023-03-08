@@ -34,54 +34,23 @@ document.body.addEventListener('click', e => {
 });
 
 const addRemoveFavorite = targetElement => {
-  const buttonState = 'add';
-  const elementType = targetElement.getAttribute('data-element-type');
-  const cocktailId = targetElement.getAttribute('data-cocktailid');
-  const ingredientId = targetElement.getAttribute('data-ingredientid');
   const action = targetElement.getAttribute('data-action') || 'add';
-  const cardType = targetElement.getAttribute('data-card-type') || '';
-
-  let elementTitle;
-  let elementSubtitle;
-  let elementData;
-  let elementId;
-
-  if (elementType == 'cocktail') {
-    const el = document.querySelector(`#cocktail-${cocktailId}`);
-    const titleEl = document.querySelector(
-      `#cocktail-${cocktailId} .gallery-item__title`
-    );
-    elementData = el.outerHTML;
-    elementTitle = titleEl.textContent;
-    elementId = cocktailId;
-  }
-
-  if (elementType == 'ingredient') {
-    const titleEl = document.querySelector(
-      `#ingredient-${ingredientId} .ingr-title`
-    );
-    const subTitleEl = document.querySelector(
-      `#ingredient-${ingredientId} .ingr-subtitle`
-    );
-    elementTitle = titleEl.textContent;
-    elementSubtitle = subTitleEl.textContent;
-    elementId = ingredientId;
-    //if (cardType != 'favorite') {}
-  }
+  const elementType = targetElement.getAttribute('data-element-type') || '';
+  const elementImage = targetElement.getAttribute('data-element-image') || '';
+  const elementTitle = targetElement.getAttribute('data-element-title') || '';
+  const elementSubtitle =
+    targetElement.getAttribute('data-element-subtitle') || '';
+  const elementId = targetElement.getAttribute('data-element-id') || '';
 
   const data = {
     action: action,
+    elementImage,
     elementType,
     elementTitle,
     elementSubtitle,
     elementId,
-    elementData,
     targetElement,
   };
 
-  const response = updateDataInFirebase(data);
-
-  if (response == 'successfully') {
-    alert('test');
-  }
+  updateDataInFirebase(data);
 };

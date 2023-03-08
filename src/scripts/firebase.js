@@ -14,7 +14,7 @@ import {
   loaderPattern,
 } from './common/patterns';
 import {
-  outputPaginationFirebase,
+  outputPagination,
   outputPaginationIngredients,
 } from './common/general';
 
@@ -109,13 +109,16 @@ onValue(nodeRef, snapshot => {
         const cocktails = data[uid].cocktails;
         if (cocktails) {
           for (const cocktailid in cocktails) {
-            markupData.push(cocktails[cocktailid].data);
+            const cocktailData = {
+              idDrink: cocktailid,
+              strDrinkThumb: cocktails[cocktailid].image,
+              strDrink: cocktails[cocktailid].title,
+            };
+
+            markupData.push(cocktailData);
           }
         }
-
-        outputPaginationFirebase(markupData);
-
-        //refs.galleryList.innerHTML = markupData.join('');
+        outputPagination(markupData);
 
         const allButtons = document.querySelectorAll(
           '[data-add-remove-favorite]'
@@ -136,8 +139,6 @@ onValue(nodeRef, snapshot => {
               subtitle: ingredients[ingredientid].subtitle,
             };
 
-            //const markup = getFavoriteIngredientPattern(ingredientData);
-
             markupData.push(ingredientData);
           }
         }
@@ -149,29 +150,6 @@ onValue(nodeRef, snapshot => {
     }
   }
 });
-
-const getFirebaseDataByUser = () => {
-  let favorites = [];
-
-  const nodeRef = ref(db, `favorites`);
-
-  onValue(nodeRef, snapshot => {
-    const user = auth.currentUser;
-    const data = snapshot.val();
-
-    for (const uid in data) {
-      if (user.uid === uid) {
-        const cocktails = data[uid].cocktails;
-        if (cocktails) favorites['cocktails'] = cocktails;
-
-        const ingredients = data[uid].ingredients;
-        if (ingredients) favorites['ingredients'] = ingredients;
-      }
-    }
-  });
-
-  return favorites;
-};
 
 refs.joinBtn.addEventListener('click', function () {
   refs.modalLoader.innerHTML = loaderPattern;
@@ -235,29 +213,6 @@ refs.loginBtn.addEventListener('click', function () {
   });
 };
 
-// var taskRef = firebase.database().ref('tasks/task1');
-
-// taskRef.remove()
-//   .then(function() {
-//     console.log('Node removed successfully!');
-//   })
-//   .catch(function(error) {
-//     console.error('Error removing node:', error);
-//   });
-
-// Check if the node exists
-// taskRef.once('value')
-//   .then(function(snapshot) {
-//     if (snapshot.exists()) {
-//       console.log('Node exists!');
-//     } else {
-//       console.log('Node does not exist!');
-//     }
-//   })
-//   .catch(function(error) {
-//     console.error('Error checking node:', error);
-//   });
-
 function login() {
   refs.joinForm.classList.add('visually-hidden');
   refs.loginForm.classList.remove('visually-hidden');
@@ -277,11 +232,11 @@ function logout() {
 
 async function updateDataInFirebase({
   action,
+  elementImage,
   elementType,
   elementTitle,
   elementSubtitle,
   elementId,
-  elementData,
   targetElement,
 }) {
   const user = auth.currentUser;
@@ -295,9 +250,9 @@ async function updateDataInFirebase({
     try {
       if (action === 'add') {
         await set(taskRef, {
+          image: elementImage,
           title: elementTitle,
           subtitle: elementSubtitle || '',
-          data: elementData || '',
         });
 
         refs.modalSuccessfullContent.innerHTML = getAddedMessagePattern({
@@ -329,7 +284,7 @@ async function updateDataInFirebase({
         } else {
           targetElement.innerHTML = 'Add to favorite';
         }
-        targetElement.setAttribute('data-action', 'ad');
+        targetElement.setAttribute('data-action', 'add');
 
         console.log('Data successfully removed from Firestore1!');
       }

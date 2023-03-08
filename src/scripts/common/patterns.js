@@ -1,10 +1,17 @@
-const getCocktailPattern = ({
-  id,
-  title,
-  image,
-  instructions,
-  ingredients,
-}) => {
+const getCocktailPattern = (
+  userData,
+  { id, title, image, instructions, ingredients }
+) => {
+  let action = '';
+  let buttonName = 'Add to favorite';
+
+  if (Object.keys(userData).length !== 0) {
+    if (userData.cocktails[id]) {
+      action = `data-action="delete"`;
+      buttonName = `Remove from favorite`;
+    }
+  }
+
   const pattern1 = `
     <div class="modal-cocktail__content">
       <!--------- Name and Instructions for mobile version --------->
@@ -68,8 +75,12 @@ const getCocktailPattern = ({
           data-add-remove-favorite
           data-cocktailid="${id}"
           data-element-type="cocktail"
+          data-element-id="${id}"
+          data-element-image="${image}"
+          data-element-title="${title}"
+          ${action}
         >
-          Add to favorite
+          ${buttonName}
         </button>
         <!--------- Add to favorite button --------->
       </div>
@@ -79,16 +90,20 @@ const getCocktailPattern = ({
   return pattern1 + pattern2.join('') + pattern3;
 };
 
-const getIngredientPattern = ({
-  id,
-  title,
-  country,
-  subtitle,
-  description,
-  type,
-  ingredient,
-  abv,
-}) => {
+const getIngredientPattern = (
+  userData,
+  { id, title, country, subtitle, description, type, ingredient, abv }
+) => {
+  let action = '';
+  let buttonName = 'Add to favorite';
+
+  if (Object.keys(userData).length !== 0) {
+    if (userData.ingredients[id]) {
+      action = `data-action="delete"`;
+      buttonName = `Remove from favorite`;
+    }
+  }
+
   const pattern1 = `
     <div class="modal-ingr__content" id="ingredient-${id}">
       <h2 class="modal-ingr__title ingr-title">${title}</h2>
@@ -151,9 +166,13 @@ const getIngredientPattern = ({
           class="button-more modal-ingr__btn"
           data-add-remove-favorite
           data-ingredientid="${id}"
+          ${action}
           data-element-type="ingredient"
+          data-element-id="${id}"
+          data-element-title="${title}"
+          data-element-subtitle="${type}"
         >
-          Add to favorite
+          ${buttonName}
         </button>
       </div>
     </div>

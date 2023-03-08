@@ -1,5 +1,6 @@
 import { requestCocktail } from './requests';
 import { getCocktailPattern, loaderPattern } from './common/patterns';
+import { checkUserStatus } from './common/general';
 import PerfectScrollbar from 'perfect-scrollbar';
 
 const refs = {
@@ -50,11 +51,15 @@ const renderContent = data => {
     ingredients: ingredients,
   };
 
-  const content = getCocktailPattern(cocktailData);
+  checkUserStatus(renderData, cocktailData);
+};
+
+function renderData(userData, cocktailData) {
+  const content = getCocktailPattern(userData, cocktailData);
   refs.modalContentEl.innerHTML = content;
 
   finalizeModal();
-};
+}
 
 const finalizeModal = () => {
   psModal.update();

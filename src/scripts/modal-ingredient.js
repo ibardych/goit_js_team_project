@@ -1,5 +1,6 @@
 import { requestIngredient } from './requests';
 import { getIngredientPattern, loaderPattern } from './common/patterns';
+import { checkUserStatus } from './common/general';
 import PerfectScrollbar from 'perfect-scrollbar';
 
 const refs = {
@@ -67,11 +68,15 @@ const renderContent = data => {
     ingredient: data.strIngredient,
   };
 
-  const content = getIngredientPattern(ingredientData);
+  checkUserStatus(renderData, ingredientData);
+};
+
+function renderData(userData, ingredientData) {
+  const content = getIngredientPattern(userData, ingredientData);
   refs.modalContentEl.innerHTML = content;
 
   finalizeModal();
-};
+}
 
 const finalizeModal = () => {
   psModal.update();
