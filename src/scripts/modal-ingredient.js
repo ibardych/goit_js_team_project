@@ -7,6 +7,7 @@ const refs = {
   modalContentEl: document.querySelector('[data-modal-ingredient-content]'),
   modal: document.querySelector('[data-modal-ingredient]'),
   modalCocktail: document.querySelector('.modal-cocktail'),
+  galleryListEl: document.querySelector('.gallery-list'),
 };
 
 const psModal = new PerfectScrollbar(refs.modalWindow, {
@@ -22,7 +23,6 @@ refs.modalCocktail.addEventListener('click', e => {
   refs.modalContentEl.innerHTML = loaderPattern;
   refs.modal.classList.toggle('is-hidden');
 
-  // const ingredientName = btn.dataset.ingredientid;
   requestIngredient({ ingredientName: ingredientName })
     .then(response => {
       renderContent(response.data.ingredients[0]);
@@ -30,6 +30,26 @@ refs.modalCocktail.addEventListener('click', e => {
     .catch(error => {
       console.log(error);
     });
+});
+
+refs.galleryListEl.addEventListener('click', e => {
+  if (
+    e.target.classList.contains('button-more') &&
+    e.target.hasAttribute('data-ingredientname')
+  ) {
+    refs.modalContentEl.innerHTML = loaderPattern;
+    refs.modal.classList.toggle('is-hidden');
+
+    const ingredientName = e.target.getAttribute('data-ingredientname');
+
+    requestIngredient({ ingredientName: ingredientName })
+      .then(response => {
+        renderContent(response.data.ingredients[0]);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
 });
 
 const renderContent = data => {

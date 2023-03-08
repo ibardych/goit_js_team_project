@@ -91,8 +91,8 @@ const getIngredientPattern = ({
 }) => {
   const pattern1 = `
     <div class="modal-ingr__content" id="ingredient-${id}">
-      <h2 class="modal-ingr__title">${title}</h2>
-      <h3 class="modal-ingr__subtitle">${type || ''}</h3>
+      <h2 class="modal-ingr__title ingr-title">${title}</h2>
+      <h3 class="modal-ingr__subtitle ingr-subtitle">${type || ''}</h3>
       <div class="modal-ingr__horiontal-line"></div>
       <div>
         <p class="modal-ingr__description">
@@ -199,12 +199,14 @@ const getRemovedMessagePattern = ({ type, name }) => {
 
 const getFavoriteIngredientPattern = ({ id, title, subtitle }) => {
   return `
-    <li id="ingredientid-${id}" class="gallery-item favorite-ingredient__item">
-      <h2 class="gallery-item__title gallery-item__title_margin favorite-ingredient__title">${title}</h2>
-      <h3 class="gallery-item__title gallery-item__title_margin favorite-ingredient__subtitle">${subtitle}</h3>
+    <li id="ingredient-${id}" class="gallery-item favorite-ingredient__item">
+      <h2 class="gallery-item__title gallery-item__title_margin favorite-ingredient__title ingr-title">${title}</h2>
+      <h3 class="gallery-item__title gallery-item__title_margin favorite-ingredient__subtitle ingr-subtitle">${
+        subtitle || '&nbsp;'
+      }</h3>
       <div class="button-container">
-        <button class="button-more" type="button" data-ingredientid="${id}">Learn More</button>
-        <button class="button-favorite" data-ingredientid="${id}" data-add-remove-favorite="" data-element-type="ingredient" type="button" data-action="delete">
+        <button class="button-more" type="button" data-ingredientname="${title}">Learn More</button>
+        <button class="button-favorite" data-ingredientname="${title}" data-ingredientid="${id}" data-add-remove-favorite="" data-element-type="ingredient" data-card-type="favorite" type="button" data-action="delete">
           <span>Remove</span>
           <svg class="button-favorite__icon" xmlns="http://www.w3.org/2000/svg" width="21" height="19" fill="none"><path fill="#FD5103" d="m10.5 19-1.523-1.367C3.57 12.798 0 9.61 0 5.695 0 2.505 2.541 0 5.775 0c1.827 0 3.58.839 4.725 2.164A6.324 6.324 0 0 1 15.225 0C18.459 0 21 2.506 21 5.695c0 3.914-3.57 7.103-8.977 11.949L10.5 19Z"/><path  d="m10.5 17-1.232-1.079C4.89 12.104 2 9.586 2 6.496 2 3.978 4.057 2 6.675 2c1.479 0 2.898.662 3.825 1.708A5.175 5.175 0 0 1 14.325 2C16.943 2 19 3.978 19 6.496c0 3.09-2.89 5.607-7.268 9.433L10.5 17Z"/></svg>
         </button>

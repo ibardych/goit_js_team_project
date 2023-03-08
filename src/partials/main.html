@@ -1,4 +1,4 @@
-<section class="gallery">
+<div class="gallery">
   <div class="container">
     <h1 class="gallery-title gallery-title_margin">Cocktails</h1>
     <ul class="gallery-list">
@@ -24,8 +24,11 @@
     <div class="gallery-error"></div>
     <button type="button" class="next-button">Next</button>
   </div>
-  <div class="error-section">
-    <picture>
+  <div class="error-section visually-hidden">
+
+    <div class="error-section__title">Sorry, we didn't find any cocktail for you</div>
+
+    <picture class="error-section__picture">
       <source
         srcset="./images/error-photo-mobile.png"
         type="image/png"

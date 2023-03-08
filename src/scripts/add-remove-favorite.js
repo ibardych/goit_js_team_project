@@ -38,6 +38,7 @@ const addRemoveFavorite = targetElement => {
   const cocktailId = targetElement.getAttribute('data-cocktailid');
   const ingredientId = targetElement.getAttribute('data-ingredientid');
   const action = targetElement.getAttribute('data-action') || 'add';
+  const cardType = targetElement.getAttribute('data-card-type') || '';
 
   let elementTitle;
   let elementSubtitle;
@@ -56,14 +57,15 @@ const addRemoveFavorite = targetElement => {
 
   if (elementType == 'ingredient') {
     const titleEl = document.querySelector(
-      `#ingredient-${ingredientId} .modal-ingr__title`
+      `#ingredient-${ingredientId} .ingr-title`
     );
     const subTitleEl = document.querySelector(
-      `#ingredient-${ingredientId} .modal-ingr__subtitle`
+      `#ingredient-${ingredientId} .ingr-subtitle`
     );
     elementTitle = titleEl.textContent;
     elementSubtitle = subTitleEl.textContent;
     elementId = ingredientId;
+    //if (cardType != 'favorite') {}
   }
 
   const data = {

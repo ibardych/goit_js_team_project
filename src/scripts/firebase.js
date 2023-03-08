@@ -14,7 +14,6 @@ import {
   loaderPattern,
   getFavoriteIngredientPattern,
 } from './common/patterns';
-import { checkWindowWidth } from './common/modals';
 
 const refs = {
   userAreaEl: document.querySelector('[data-user-area]'),
@@ -29,6 +28,8 @@ const refs = {
   modalSuccessfullContent: document.querySelector(
     '[data-modal-successfull-content]'
   ),
+  errorSection: document.querySelector('[data-error-section]'),
+  galleryList: document.querySelector('.gallery-list'),
 };
 
 refs.userAreaEl.addEventListener('click', e => {
@@ -78,6 +79,9 @@ auth.onAuthStateChanged(user => {
     //console.log('Signed in user:', uid, email);
   } else {
     refs.userAreaEl.innerHTML = getUserAreaPattern({});
+
+    refs.galleryList.innerHTML = '';
+    refs.errorSection.classList.toggle('visually-hidden');
     // No user is signed in
     //console.log('No user is signed in.');
   }
@@ -89,7 +93,6 @@ const nodeRef = ref(db, `favorites`);
 
 onValue(nodeRef, snapshot => {
   const user = auth.currentUser;
-  const galleryList = document.querySelector('.gallery-list');
   const data = snapshot.val();
   const markupData = [];
 
@@ -103,7 +106,7 @@ onValue(nodeRef, snapshot => {
           }
         }
 
-        galleryList.innerHTML = markupData.join('');
+        refs.galleryList.innerHTML = markupData.join('');
 
         const allButtons = document.querySelectorAll(
           '[data-add-remove-favorite]'
@@ -123,7 +126,6 @@ onValue(nodeRef, snapshot => {
               title: ingredients[ingredientid].title,
               subtitle: ingredients[ingredientid].subtitle,
             };
-            console.log(ingredientData);
 
             const markup = getFavoriteIngredientPattern(ingredientData);
 
@@ -131,12 +133,10 @@ onValue(nodeRef, snapshot => {
           }
         }
 
-        galleryList.innerHTML = markupData.join('');
+        refs.galleryList.innerHTML = markupData.join('');
       }
     }
   }
-  //console.log(data);
-  //updateStarCount(postElement, data);
 });
 
 refs.joinBtn.addEventListener('click', function () {
@@ -228,8 +228,6 @@ function login() {
   refs.joinForm.classList.add('visually-hidden');
   refs.loginForm.classList.remove('visually-hidden');
   refs.modalAuthentication.classList.toggle('is-hidden');
-
-  checkWindowWidth();
 }
 
 function logout() {
@@ -299,7 +297,7 @@ async function updateDataInFirebase({
         }
         targetElement.setAttribute('data-action', 'ad');
 
-        console.log('Data successfully removed from Firestore!');
+        console.log('Data successfully removed from Firestore1!');
       }
     } catch (error) {
       console.error('Error writing document: ', error);

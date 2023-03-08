@@ -12,7 +12,10 @@ const refs = {
 const psModal = new PerfectScrollbar(refs.modalWindow);
 
 refs.galleryListEl.addEventListener('click', e => {
-  if (e.target.classList.contains('button-more')) {
+  if (
+    e.target.classList.contains('button-more') &&
+    e.target.hasAttribute('data-cocktailid')
+  ) {
     refs.modalContentEl.innerHTML = loaderPattern;
     refs.modal.classList.toggle('is-hidden');
 
