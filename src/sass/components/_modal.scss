@@ -9,6 +9,8 @@
   opacity: 1;
   visibility: visible;
   @include transition(visibility, opacity);
+
+  backdrop-filter: blur(2px);
 }
 
 .modal.is-hidden {

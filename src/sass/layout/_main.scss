@@ -68,6 +68,10 @@
   }
 }
 
+.show-all-items .gallery-item {
+  display: block !important;
+}
+
 .gallery-item {
   border: 1px solid $grapefruit-color;
   border-radius: 4px;

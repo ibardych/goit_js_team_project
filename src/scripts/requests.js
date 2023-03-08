@@ -19,4 +19,21 @@ async function getRundomCocktailes() {
   return response.data.drinks[0];
 }
 
-export { requestCocktail, requestIngredient, getRundomCocktailes };
+const requestCocktails = searchText => {
+  const result1 = axios.get(
+    `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${searchText}`
+  );
+
+  const result2 = axios.get(
+    `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${searchText}`
+  );
+
+  return Promise.all([result1, result2]);
+};
+
+export {
+  requestCocktail,
+  requestIngredient,
+  getRundomCocktailes,
+  requestCocktails,
+};

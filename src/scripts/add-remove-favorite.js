@@ -19,6 +19,7 @@ document.body.addEventListener('click', e => {
     targetElement = e.target.parentElement;
   }
   if (
+    e.target.parentElement &&
     e.target.parentElement.parentElement &&
     e.target.parentElement.parentElement.hasAttribute(
       'data-add-remove-favorite'
