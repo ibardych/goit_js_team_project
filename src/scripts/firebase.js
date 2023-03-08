@@ -102,7 +102,11 @@ auth.onAuthStateChanged(user => {
 
     for (const uid in data) {
       if (user.uid == uid) {
-        if (window.location.pathname == '/favorite-cocktails.html') {
+        const nomalizeURI = window.location.pathname.replace(
+          '/goit_js_team_project',
+          ''
+        );
+        if (nomalizeURI == '/favorite-cocktails.html') {
           const cocktails = data[uid].cocktails;
           if (cocktails) {
             for (const cocktailid in cocktails) {
@@ -123,7 +127,7 @@ auth.onAuthStateChanged(user => {
           });
         }
 
-        if (window.location.pathname == '/favorite-ingredients.html') {
+        if (nomalizeURI == '/favorite-ingredients.html') {
           const ingredients = data[uid].ingredients;
           if (ingredients) {
             for (const ingredientid in ingredients) {
