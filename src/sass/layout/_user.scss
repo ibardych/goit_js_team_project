@@ -3,6 +3,7 @@
   justify-content: flex-end;
   align-items: center;
   font-size: 14px;
+  position: relative;
 
   body.dark-mode & {
     color: $white-color;
@@ -45,5 +46,9 @@
 
   @include for-size(tablet) {
     font-size: 20px;
+  }
+
+  body.dark-mode & {
+    color: $white-color;
   }
 }

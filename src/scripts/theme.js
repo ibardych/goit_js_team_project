@@ -35,4 +35,7 @@ let getTheme = JSON.parse(localStorage.getItem('PageTheme'));
 
 if (getTheme === 'DARK') {
   document.body.classList = 'dark-mode';
+  themeBtn.forEach(el => {
+    el.classList.add('active');
+  });
 }

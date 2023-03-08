@@ -2,11 +2,24 @@
   display: inline-block;
   position: relative;
   width: 40px;
+  flex-shrink: 0;
+  flex-grow: 0;
 
   &::after {
     content: '';
     display: block;
     padding-top: 100%;
+  }
+
+  &.small {
+    width: 20px;
+    height: 20px;
+  }
+
+  &-position1 {
+    top: 30px;
+    right: -10px;
+    margin-right: -20px;
   }
 }
 .loader-type1 div {

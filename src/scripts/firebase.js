@@ -243,23 +243,27 @@ refs.joinBtn.addEventListener('click', function () {
   const email = refs.joinForm.elements.email.value;
   const password = refs.joinForm.elements.password.value;
 
-  createUserWithEmailAndPassword(auth, email, password)
-    .then(userCredential => {
-      const user = userCredential.user;
-      console.log('User account created:', user.uid);
+  setTimeout(() => {
+    createUserWithEmailAndPassword(auth, email, password)
+      .then(userCredential => {
+        const user = userCredential.user;
+        console.log('User account created:', user.uid);
 
-      refs.wellcomeEl.classList.toggle('visually-hidden');
-      refs.joinForm.classList.toggle('visually-hidden');
-      hideNotAuthorizedMessage();
-      location.reload();
-    })
-    .catch(error => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.error('Error creating user account:', errorMessage);
-      console.error('errorCode:', errorCode);
-    })
-    .finally(refs.modalLoader.classList.toggle('visually-hidden'));
+        if (nomalizeURI === '/' || nomalizeURI === '/index.html') {
+          refs.wellcomeEl.classList.toggle('visually-hidden');
+        }
+        refs.joinForm.classList.toggle('visually-hidden');
+        hideNotAuthorizedMessage();
+        location.reload();
+      })
+      .catch(error => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.error('Error creating user account:', errorMessage);
+        console.error('errorCode:', errorCode);
+      })
+      .finally(refs.modalLoader.classList.toggle('visually-hidden'));
+  }, 500);
 });
 
 refs.loginBtn.addEventListener('click', function () {
@@ -269,21 +273,25 @@ refs.loginBtn.addEventListener('click', function () {
   const email = refs.loginForm.elements.email.value;
   const password = refs.loginForm.elements.password.value;
 
-  signInWithEmailAndPassword(auth, email, password)
-    .then(userCredential => {
-      const user = userCredential.user;
-      console.log('User signed in:', user.uid);
+  setTimeout(() => {
+    signInWithEmailAndPassword(auth, email, password)
+      .then(userCredential => {
+        const user = userCredential.user;
+        console.log('User signed in:', user.uid);
 
-      refs.wellcomeEl.classList.toggle('visually-hidden');
-      refs.loginForm.classList.toggle('visually-hidden');
-      hideNotAuthorizedMessage();
-    })
-    .catch(error => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.error('Error signing in:', errorMessage);
-    })
-    .finally(refs.modalLoader.classList.toggle('visually-hidden'));
+        if (nomalizeURI === '/' || nomalizeURI === '/index.html') {
+          refs.wellcomeEl.classList.toggle('visually-hidden');
+        }
+        refs.loginForm.classList.toggle('visually-hidden');
+        hideNotAuthorizedMessage();
+      })
+      .catch(error => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.error('Error signing in:', errorMessage);
+      })
+      .finally(refs.modalLoader.classList.toggle('visually-hidden'));
+  }, 500);
 });
 
 () => {
@@ -303,13 +311,18 @@ function login() {
 }
 
 function logout() {
-  signOut(auth)
-    .then(() => {
-      refs.userAreaEl.innterHTML = getUserAreaPattern({});
-    })
-    .catch(error => {
-      console.error('Error signing out:', error);
-    });
+  const loader = document.querySelector('.user [data-loader]');
+  loader.classList.remove('visually-hidden');
+  setTimeout(() => {
+    signOut(auth)
+      .then(() => {
+        refs.userAreaEl.innterHTML = getUserAreaPattern({});
+        loader.classList.add('visually-hidden');
+      })
+      .catch(error => {
+        console.error('Error signing out:', error);
+      });
+  }, 500);
 }
 
 async function updateDataInFirebase({
