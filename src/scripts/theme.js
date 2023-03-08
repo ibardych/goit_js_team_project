@@ -1,25 +1,32 @@
 const themeBtn = document.querySelectorAll('.toggler');
-const themeActive = document.querySelector('toggler.active');
+//const themeActive = document.querySelector('toggler.active');
 
 themeBtn.forEach(el => {
-  el.addEventListener('click', saveTheme);
+  el.addEventListener('click', () => {
+    saveTheme(el);
+  });
 });
 
-function selectTheme() {
-  themeBtn.forEach(el => {
-    el.classList.toggle('active');
-    document.body.classList.toggle('dark-mode');
-  });
-}
+// function selectTheme() {
+//   themeBtn.forEach(el => {
+//     el.classList.toggle('active');
+//     document.body.classList.toggle('dark-mode');
+//   });
+// }
 
-function saveTheme() {
-  let setTheme = document.body;
+function saveTheme(el) {
   let theme;
 
-  if (setTheme.classList.contains('dark-mode')) {
+  if (document.body.classList.contains('dark-mode')) {
     theme = 'DARK';
+    themeBtn.forEach(el => {
+      el.classList.add('active');
+    });
   } else {
     theme = 'LIGHT';
+    themeBtn.forEach(el => {
+      el.classList.remove('active');
+    });
   }
   localStorage.setItem('PageTheme', JSON.stringify(theme));
 }

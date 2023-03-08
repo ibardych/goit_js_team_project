@@ -76,3 +76,18 @@ body {
     }
   }
 }
+
+#tui-pagination-container {
+  margin-bottom: 30px;
+}
+
+.tui-pagination .tui-last-child.tui-is-selected {
+  border: 1px solid $grapefruit-color !important;
+  background-color: $orange-color !important;
+}
+
+.tui-pagination .tui-is-selected,
+.tui-pagination strong {
+  border: 1px solid $grapefruit-color !important;
+  background-color: $orange-color !important;
+}
