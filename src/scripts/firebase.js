@@ -12,7 +12,6 @@ import {
   getAddedMessagePattern,
   getRemovedMessagePattern,
   loaderPattern,
-  getFavoriteIngredientPattern,
 } from './common/patterns';
 import {
   outputPaginationFirebase,
@@ -93,59 +92,61 @@ auth.onAuthStateChanged(user => {
 
 // Retrieve data from the node once
 
-const nodeRef = ref(db, `favorites`);
+() => {
+  const nodeRef = ref(db, `favorites`);
 
-onValue(nodeRef, snapshot => {
-  const user = auth.currentUser;
-  const data = snapshot.val();
-  const markupData = [];
+  onValue(nodeRef, snapshot => {
+    const user = auth.currentUser;
+    const data = snapshot.val();
+    const markupData = [];
 
-  for (uid in data) {
-    if (user.uid == uid) {
-      if (window.location.pathname == '/favorite-cocktails.html') {
-        const cocktails = data[uid].cocktails;
-        if (cocktails) {
-          for (const cocktailid in cocktails) {
-            markupData.push(cocktails[cocktailid].data);
+    for (uid in data) {
+      if (user.uid == uid) {
+        if (window.location.pathname == '/favorite-cocktails.html') {
+          const cocktails = data[uid].cocktails;
+          if (cocktails) {
+            for (const cocktailid in cocktails) {
+              markupData.push(cocktails[cocktailid].data);
+            }
           }
+
+          outputPaginationFirebase(markupData);
+
+          //refs.galleryList.innerHTML = markupData.join('');
+
+          const allButtons = document.querySelectorAll(
+            '[data-add-remove-favorite]'
+          );
+          allButtons.forEach(btn => {
+            btn.firstElementChild.textContent = 'Remove';
+            btn.setAttribute('data-action', 'delete');
+          });
         }
 
-        outputPaginationFirebase(markupData);
+        if (window.location.pathname == '/favorite-ingredients.html') {
+          const ingredients = data[uid].ingredients;
+          if (ingredients) {
+            for (const ingredientid in ingredients) {
+              const ingredientData = {
+                id: ingredientid,
+                title: ingredients[ingredientid].title,
+                subtitle: ingredients[ingredientid].subtitle,
+              };
 
-        //refs.galleryList.innerHTML = markupData.join('');
+              //const markup = getFavoriteIngredientPattern(ingredientData);
 
-        const allButtons = document.querySelectorAll(
-          '[data-add-remove-favorite]'
-        );
-        allButtons.forEach(btn => {
-          btn.firstElementChild.textContent = 'Remove';
-          btn.setAttribute('data-action', 'delete');
-        });
-      }
-
-      if (window.location.pathname == '/favorite-ingredients.html') {
-        const ingredients = data[uid].ingredients;
-        if (ingredients) {
-          for (const ingredientid in ingredients) {
-            const ingredientData = {
-              id: ingredientid,
-              title: ingredients[ingredientid].title,
-              subtitle: ingredients[ingredientid].subtitle,
-            };
-
-            //const markup = getFavoriteIngredientPattern(ingredientData);
-
-            markupData.push(ingredientData);
+              markupData.push(ingredientData);
+            }
           }
+
+          outputPaginationIngredients(markupData);
+
+          // refs.galleryList.innerHTML = markupData.join('');
         }
-
-        outputPaginationIngredients(markupData);
-
-        // refs.galleryList.innerHTML = markupData.join('');
       }
     }
-  }
-});
+  });
+};
 
 const getFirebaseDataByUser = () => {
   let favorites = [];
