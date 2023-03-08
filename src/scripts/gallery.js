@@ -1,5 +1,5 @@
 import { getRundomCocktailes } from './requests';
-import { markupGallery } from './common/general';
+import { outputPagination } from '../scripts/common/general';
 
 const galleryEl = document.querySelector('.gallery-list');
 
@@ -12,9 +12,11 @@ function createGallery() {
 
   Promise.all(promisesGallery)
     .then(data => {
-      markupGallery(data).then(data => {
-        galleryEl.innerHTML = data;
-      });
+      outputPagination(data);
+
+      // markupGallery(data).then(data => {
+      //   galleryEl.innerHTML = data;
+      // });
     })
     .catch();
 }

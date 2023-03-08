@@ -154,7 +154,7 @@ const options = {
   // below default value of options
   totalItems: 0,
   itemsPerPage: 6,
-  visiblePages: 5,
+  visiblePages: 3,
   page: 1,
   centerAlign: true,
   firstItemClassName: 'tui-first-child',

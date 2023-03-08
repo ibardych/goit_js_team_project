@@ -2,7 +2,7 @@ import { createRequstByLetter } from './hero_api';
 import { markupGallery } from '../scripts/common/general';
 import { storeData } from '../scripts/gallery';
 import { getRundomCocktailes } from './hero_api';
-import { markupGalleryTwo } from '../scripts/common/general';
+import { outputPagination } from '../scripts/common/general';
 
 import jQuery from 'jquery';
 import Pagination from 'tui-pagination';
@@ -43,9 +43,9 @@ export function onLetterChoose(evt) {
 
   const selectedOptionText = selectedOption.textContent;
 
-  createRequstByLetter(selectedOptionText).then(data =>
-    galleryCardsRender(data.drinks)
-  );
+  createRequstByLetter(selectedOptionText).then(data => {
+    galleryCardsRender(data.drinks);
+  });
 }
 
 function galleryCardsRender(data) {
@@ -55,7 +55,9 @@ function galleryCardsRender(data) {
     return;
   }
   galleryError.innerHTML = '';
-  galleryEl.innerHTML = markupGallery(data);
+
+  outputPagination(data);
+  // galleryEl.innerHTML = markupGallery(data);
   //   const dataSource = markupGallery(data);
   //   console.log(dataSource);
 
