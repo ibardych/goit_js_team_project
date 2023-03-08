@@ -1,9 +1,18 @@
-const themeBtn = document.querySelector('.toggler');
-// console.log(themeBtn);
+const themeBtn = document.querySelectorAll('.toggler');
+const themeActive = document.querySelector('toggler.active');
 
-themeBtn.addEventListener('click', selectTheme);
+themeBtn.forEach(el => {
+  el.addEventListener('click', saveTheme);
+});
 
 function selectTheme() {
+  themeBtn.forEach(el => {
+    el.classList.toggle('active');
+    document.body.classList.toggle('dark-mode');
+  });
+}
+
+function saveTheme() {
   let setTheme = document.body;
   let theme;
 

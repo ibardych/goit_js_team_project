@@ -153,7 +153,7 @@
   border-radius: 5px 0 0 5px;
   background: $white-color;
   body.dark-mode & {
-    background-color: $black-color;
+    background-color: inherit;
   }
 }
 
@@ -168,7 +168,7 @@
   background: $white-color;
   color: #9e9c9c;
   body.dark-mode & {
-    background-color: $black-color;
+    background-color: inherit;
   }
 }
 
