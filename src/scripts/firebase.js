@@ -161,7 +161,7 @@ const getFirebaseDataByUser = () => {
     const user = auth.currentUser;
     const data = snapshot.val();
 
-    for (uid in data) {
+    for (const uid in data) {
       if (user.uid == uid) {
         const cocktails = data[uid].cocktails;
         if (cocktails) favorites['cocktails'] = cocktails;
