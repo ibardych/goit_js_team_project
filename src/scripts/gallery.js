@@ -19,6 +19,7 @@ function createGallery() {
 
 const uri = window.location.pathname;
 
-if (uri == '/' || uri == '/index.html') {
+const nomalizeURI = uri.replace('/goit_js_team_project', '');
+if (nomalizeURI === '/' || nomalizeURI === '/index.html') {
   createGallery();
 }
