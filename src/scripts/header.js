@@ -8,6 +8,8 @@ const refs = {
   galleryList: document.querySelector('.gallery-list'),
   galleryTitle: document.querySelector('h1.gallery-title'),
   modalMobile: document.querySelector('[data-modal-mob-menu]'),
+  errorSection: document.querySelector('[data-error-section]'),
+  paginationEl: document.querySelector('#tui-pagination-container'),
 };
 
 refs.searchForm.addEventListener('submit', e => {
@@ -32,6 +34,8 @@ refs.searchForm.addEventListener('submit', e => {
         refs.galleryList.innerHTML = ``;
         refs.galleryTitle.classList.add('visually-hidden');
         refs.galleryList.classList.add('visually-hidden');
+        refs.errorSection.classList.remove('visually-hidden');
+        refs.paginationEl.classList.add('visually-hidden');
         return;
       }
 
@@ -70,6 +74,8 @@ refs.searchFormMobile.addEventListener('submit', e => {
         refs.galleryList.innerHTML = ``;
         refs.galleryTitle.classList.add('visually-hidden');
         refs.galleryList.classList.add('visually-hidden');
+        refs.errorSection.classList.remove('visually-hidden');
+        refs.paginationEl.classList.add('visually-hidden');
         return;
       }
 

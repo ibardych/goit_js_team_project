@@ -5,6 +5,7 @@ import Pagination from 'tui-pagination';
 
 const refs = {
   galleryList: document.querySelector('.gallery-list'),
+  galleryTitle: document.querySelector('h1.gallery-title'),
   paginationEl: document.querySelector('#tui-pagination-container'),
   errorSection: document.querySelector('[data-error-section]'),
 };
@@ -110,9 +111,9 @@ function outputPagination(galleryElements) {
 function outputPaginationDo(allItems) {
   const totalItems = allItems.length;
   const itemsPerPage = getItemsPerPage();
-
   const pagesNumber = Math.ceil(totalItems / itemsPerPage);
   checkPaginationVisible(pagesNumber);
+  checkNoResultsVisible(totalItems);
 
   options.totalItems = totalItems;
   options.itemsPerPage = itemsPerPage;
@@ -222,7 +223,6 @@ function outputPaginationData(allItems) {
   const totalItems = allItems.length;
   const itemsPerPage = getItemsPerPage();
   const pagesNumber = Math.ceil(totalItems / itemsPerPage);
-
   checkPaginationVisible(pagesNumber);
 
   options.totalItems = totalItems;
@@ -256,6 +256,13 @@ function checkPaginationVisible(pagesNumber) {
   } else {
     refs.errorSection.classList.add('visually-hidden');
   }
+}
+
+function checkNoResultsVisible(totalItems) {
+  if (!totalItems) return;
+
+  refs.galleryTitle.classList.remove('visually-hidden');
+  refs.galleryList.classList.remove('visually-hidden');
 }
 
 function getItemsPerPage() {
