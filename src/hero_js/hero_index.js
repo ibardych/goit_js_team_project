@@ -49,5 +49,5 @@ function galleryCardsRender(data) {
   }
   galleryError.innerHTML = '';
 
-  outputPagination(data);
+  outputPagination(data, 'search');
 }

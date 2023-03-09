@@ -43,7 +43,7 @@
   bottom: 0;
   background-color: white;
   z-index: 999;
-  height: 100vh;
+  height: 100%;
   body.dark-mode & {
     background-color: $black-color;
   }
@@ -179,10 +179,11 @@
 }
 
 .mob-menu-fav-icon {
-  &:active {
+  &.active {
     transform: rotate(-180deg);
     // margin-right: 11px;
   }
+
   body.dark-mode & {
     fill: $white-color;
   }
@@ -217,9 +218,9 @@
   background-color: inherit;
   margin-left: 11px;
 
-  &:active {
-    padding: 0;
-  }
+  // &:active {
+  //   padding: 0;
+  // }
 }
 
 .fav-desc-mob a {
