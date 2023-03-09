@@ -128,19 +128,9 @@ function outputPaginationDo(allItems, type) {
 
   refs.galleryList.innerHTML = allItems.slice(0, itemsPerPage).join('');
 
-  if (
-    type == 'search' &&
-    (normalizeURI === '/' || normalizeURI === '/index.html')
-  ) {
+  if (type === 'search') {
     const element = document.getElementById('cards');
     element.scrollIntoView();
-  }
-
-  if (
-    type == 'search' &&
-    (normalizeURI === '/favorite-cocktails.html' ||
-      normalizeURI === '/favorite-ingredients.html')
-  ) {
     refs.mainPageTitle.textContent = 'Cocktails';
   }
 
