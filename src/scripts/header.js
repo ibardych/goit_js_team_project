@@ -84,7 +84,7 @@ refs.searchFormMobile.addEventListener('submit', e => {
       ).map(idDrink => {
         return allDrinks.find(obj => obj.idDrink === idDrink);
       });
-      outputPagination(uniqueDrinks);
+      outputPagination(uniqueDrinks, 'search');
     })
     .catch(error => console.log(error))
     .finally();
