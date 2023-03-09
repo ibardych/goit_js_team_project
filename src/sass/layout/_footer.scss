@@ -58,70 +58,15 @@
   }
 }
 
-// .footer-nav__list {
-//   display: flex;
-//   justify-content: center;
-//   flex-direction: column;
-//   align-items: center;
-//   margin-bottom: 10px;
-
-//   @include for-size(tablet) {
-//     flex-direction: row;
-//     justify-content: flex-start;
-//     margin-bottom: 0;
-//     margin-right: 80px;
-//   }
-//   @include for-size(desktop) {
-//     justify-content: flex-start;
-//     flex-direction: row;
-//     margin-bottom: 0;
-//     margin-right: 70px;
-//   }
-// }
-
-// .footer-nav__item {
-//   margin-bottom: 20px;
-
-//   @include for-size(tablet) {
-//     margin-bottom: 0;
-//     margin-right: 60px;
-//   }
-//   @include for-size(desktop) {
-//     margin-bottom: 0;
-//     margin-right: 60px;
-//   }
-// }
-// .footer-nav__item:last-child {
-//   margin-right: 0;
-// }
-
-// .footer-nav__link {
-//   font-family: 'Poppins';
-//   font-weight: 400;
-//   font-size: 16px;
-//   line-height: 1.5;
-//   letter-spacing: 0.02em;
-//   color: $black-color;
-
-//   @include for-size(tablet) {
-//     font-size: 18px;
-//     line-height: 1.3;
-//   }
-//   @include for-size(desktop) {
-//     font-size: 18px;
-//     line-height: 1.3;
-//   }
-// }
-
 .footer-by {
- display: flex;
- justify-content: center;
- color: #ffffff;
- margin-left: 0;
- font-size: 16px;
+  display: flex;
+  justify-content: center;
+  color: #ffffff;
+  margin-left: 0;
+  font-size: 16px;
 
   @include for-size(tablet) {
-  font-size: 13px;
+    font-size: 13px;
   }
 
   @include for-size(desktop) {
@@ -140,13 +85,13 @@
   @include for-size(tablet) {
     gap: 20px;
     margin-bottom: 0;
-    margin-right: 48px
+    margin-right: 48px;
   }
 
   @include for-size(desktop) {
     gap: 48px;
     margin-bottom: 0;
-    margin-right: 196px
+    margin-right: 196px;
   }
 }
 
@@ -182,9 +127,10 @@
   height: 40px;
   border-color: transparent;
   border-radius: 50%;
-  background-color: #d2d7dd;
+  background-color: rgb(210, 215, 221);
   opacity: 0;
-  @include transition(opacity);
+  outline: none;
+  @include transition(background-color);
 
   @include for-size(tablet) {
     bottom: 150px;
@@ -201,8 +147,7 @@
 
 .back-to-top:hover,
 .back-to-top:focus {
-  filter: brightness(1.5);
-  outline: none;
+  background-color: rgba(210, 215, 221, 0.7);
 }
 
 .back-to-top::before,

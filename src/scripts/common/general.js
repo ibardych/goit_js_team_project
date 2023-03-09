@@ -8,7 +8,13 @@ const refs = {
   galleryTitle: document.querySelector('h1.gallery-title'),
   paginationEl: document.querySelector('#tui-pagination-container'),
   errorSection: document.querySelector('[data-error-section]'),
+  mainPageTitle: document.querySelector('h1.gallery-title'),
 };
+
+const normalizeURI = window.location.pathname.replace(
+  '/goit_js_team_project',
+  ''
+);
 
 const firebaseConfig = {
   apiKey: 'AIzaSyCTBJG-qoCxnqY0kLartne6JuIMgO3rCtI',
@@ -55,17 +61,17 @@ const getFirebaseDataByUser = async () => {
   });
 };
 
-function checkUserStatus(callback, galleryElements) {
+function checkUserStatus(callback, galleryElements, type) {
   const userDataPromise = getFirebaseDataByUser();
 
   userDataPromise
     .then(userData => {
-      callback(userData, galleryElements);
+      callback(userData, galleryElements, type);
     })
-    .catch(() => callback([], galleryElements));
+    .catch(() => callback([], galleryElements, type));
 }
 
-function createGalleryElements(userData, galleryElements) {
+function createGalleryElements(userData, galleryElements, type) {
   const markup1 = galleryElements.map(
     ({ strDrinkThumb, strDrink, idDrink }) => {
       let action = '';
@@ -101,14 +107,14 @@ function createGalleryElements(userData, galleryElements) {
     }
   );
 
-  outputPaginationDo(markup1);
+  outputPaginationDo(markup1, type);
 }
 
-function outputPagination(galleryElements) {
-  return checkUserStatus(createGalleryElements, galleryElements);
+function outputPagination(galleryElements, type) {
+  return checkUserStatus(createGalleryElements, galleryElements, type);
 }
 
-function outputPaginationDo(allItems) {
+function outputPaginationDo(allItems, type) {
   const totalItems = allItems.length;
   const itemsPerPage = getItemsPerPage();
   const pagesNumber = Math.ceil(totalItems / itemsPerPage);
@@ -121,6 +127,22 @@ function outputPaginationDo(allItems) {
   const pagination = new Pagination(container, options);
 
   refs.galleryList.innerHTML = allItems.slice(0, itemsPerPage).join('');
+
+  if (
+    type == 'search' &&
+    (normalizeURI === '/' || normalizeURI === '/index.html')
+  ) {
+    const element = document.getElementById('cards');
+    element.scrollIntoView();
+  }
+
+  if (
+    type == 'search' &&
+    (normalizeURI === '/favorite-cocktails.html' ||
+      normalizeURI === '/favorite-ingredients.html')
+  ) {
+    refs.mainPageTitle.textContent = 'Cocktails';
+  }
 
   pagination.on('afterMove', event => {
     const currentPage = event.page;
