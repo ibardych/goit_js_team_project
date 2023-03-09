@@ -363,6 +363,14 @@ async function updateDataInFirebase({
 
         targetElement.setAttribute('data-action', 'delete');
 
+        const allFavBtns = document.querySelectorAll(
+          `[data-favorite-button-${elementId}]`
+        );
+        allFavBtns.forEach(btn => {
+          btn.setAttribute('data-action', 'delete');
+          btn.firstElementChild.textContent = 'Remove';
+        });
+
         console.log('Data successfully written to Firestore!');
       }
 
